@@ -9,18 +9,6 @@
 },
 {
 	type: "Assumptions",
-	content: "The snowman will come to life and request a top hat and a carrot nose upgrade."
-},
-{
-	type: "Assumptions",
-	content: "The snowman will come to life and request a top hat and a carrot nose upgrade."
-},
-{
-	type: "Assumptions",
-	content: "Website visitors will feel so cozy that they'll forget about their holiday shopping and start building snow forts instead."
-},
-{
-	type: "Assumptions",
 	content: "The snowflakes will start having deep conversations about the meaning of life, causing a philosophical crisis in the code."
 },
 {
@@ -41,7 +29,7 @@
 },
 {
 	type: "Assumptions",
-	content: "Clicking the "Winterize" button will instantly transform the application into a winter wonderland, complete with falling snow and jingle bells."
+	content: "Clicking the 'Winterize' button will instantly transform the application into a winter wonderland, complete with falling snow and jingle bells."
 },
 {
 	type: "Assumptions",
@@ -49,7 +37,7 @@
 },
 {
 	type: "Assumptions",
-	content: "The "Snow Day" mode in the game will be so addictive that players will forget about school and work, causing a temporary worldwide snow day epidemic."
+	content: "The 'Snow Day' mode in the game will be so addictive that players will forget about school and work, causing a temporary worldwide snow day epidemic."
 },
 {
 	type: "Assumptions",
@@ -109,5 +97,5 @@
 {
 	type: "Assumptions",
 	content: "The winter-themed social media campaign will go viral and attract an unexpected following."
-},
+}
 ]
