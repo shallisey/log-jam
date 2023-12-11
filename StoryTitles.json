@@ -9,10 +9,6 @@
 },
 {
 	type: "Title",
-	content: "Optimize Website Performance for Cold Weather Conditions"
-},
-{
-	type: "Title",
 	content: "Add Festive Snowfall Animation to Homepage"
 },
 {
@@ -202,5 +198,5 @@
 {
 	type: "Title",
 	content: "Add Winter-themed Easter Eggs for User Engagement"
-},
+}
 ]
