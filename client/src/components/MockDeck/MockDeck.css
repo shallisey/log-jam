@@ -1,0 +1,7 @@
+.fakeCard {
+  display: inline-block;
+  width: 170px;
+  height: 230px;
+  margin: 10px;
+  background-color: crimson;
+}

@@ -1,12 +1,12 @@
 class GameState {
-  constructor(deck = [], judgeDeck = [], playerInfo = []) {
-    this.playerDeck = deck;
-    this.playerDiscardPile = [];
-    this.judgeDeck = judgeDeck;
-    this.judgeDiscardPile = [];
-    this.playerInfo = [];
-    this.gamePhase = // todo figure out phase of game
-  }
+  // constructor(deck = [], judgeDeck = [], playerInfo = []) {
+  //   this.playerDeck = deck;
+  //   this.playerDiscardPile = [];
+  //   this.judgeDeck = judgeDeck;
+  //   this.judgeDiscardPile = [];
+  //   this.playerInfo = [];
+  //   this.gamePhase = // todo figure out phase of game
+  // }
 
   addPlayer(playerToAdd) {
     const socketId = playerToAdd.socketId;
@@ -34,8 +34,6 @@ class GameState {
   startGame() {}
 
   endGame() {}
-
-
 }
 
 module.exports = GameState;

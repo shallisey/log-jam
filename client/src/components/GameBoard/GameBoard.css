@@ -1,0 +1,35 @@
+.game-grid {
+  display: grid;
+  grid-template-columns: min-content 5fr min-content;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-areas:
+    ".             mockdeck-top                 ."
+    "mockdeck-left       .          mockdeck-right"
+    ".            playerdeck-bottom             .";
+}
+
+.mockdeck-top {
+  grid-area: mockdeck-top;
+}
+
+.mockdeck-right {
+  grid-area: mockdeck-right;
+}
+
+.playerdeck-bottom {
+  grid-area: playerdeck-bottom;
+}
+
+.mockdeck-left {
+  grid-area: mockdeck-left;
+}
+
+.mockdeck-right .fakeCard {
+  transform: rotate(90deg);
+  height: 170px;
+}
+
+.mockdeck-left .fakeCard {
+  transform: rotate(90deg);
+  height: 170px;
+}
