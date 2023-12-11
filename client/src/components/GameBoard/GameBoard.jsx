@@ -7,16 +7,23 @@ const GameBoard = () => {
   return (
     <div className="game-grid">
       <div className="mockdeck-top">
-        <MockDeck className="mockdeck-top" text="top" />
+        <MockDeck text="top" />
       </div>
       <div className="mockdeck-right">
-        <MockDeck className="mockdeck-right" text="right" />
+        <MockDeck text="right" />
+      </div>
+      <div className="played-cards">
+        <Deck />
       </div>
       <div className="playerdeck-bottom">
         <Deck className="playerdeck-bottom" />
       </div>
       <div className="mockdeck-left">
-        <MockDeck className="mockdeck-left" text="left" />
+        <MockDeck text="left" />
+      </div>
+      <div className="game-info">
+        <h1>Hello World I'm LogJam!</h1>
+        Game Info
       </div>
     </div>
   );

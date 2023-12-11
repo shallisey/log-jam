@@ -1,11 +1,18 @@
 .game-grid {
   display: grid;
-  grid-template-columns: min-content 5fr min-content;
-  grid-template-rows: min-content min-content min-content;
+  grid-template-columns: min-content max-content min-content 1fr;
+  grid-template-rows: min-content min-content min-content min-content;
+  /* grid-template-areas:
+    ".                mockdeck-top      ."
+    "mockdeck-left       .              mockdeck-right"
+    "mockdeck-left   played-cards       mockdeck-right"
+    ".               playerdeck-bottom  ."; */
+
   grid-template-areas:
-    ".             mockdeck-top                 ."
-    "mockdeck-left       .          mockdeck-right"
-    ".            playerdeck-bottom             .";
+    "mockdeck-left   mockdeck-top       mockdeck-right game-info"
+    "mockdeck-left       .              mockdeck-right game-info"
+    "mockdeck-left   played-cards       mockdeck-right game-info"
+    "mockdeck-left   playerdeck-bottom  mockdeck-right game-info";
 }
 
 .mockdeck-top {
@@ -16,6 +23,10 @@
   grid-area: mockdeck-right;
 }
 
+.played-cards {
+  grid-area: played-cards;
+}
+
 .playerdeck-bottom {
   grid-area: playerdeck-bottom;
 }
@@ -24,8 +35,19 @@
   grid-area: mockdeck-left;
 }
 
+.game-info {
+  grid-area: game-info;
+  background-color: aqua;
+  margin: 10px;
+}
+
+.mockdeck-top .fakeCard {
+  transform: rotate(180deg);
+  height: 170px;
+}
+
 .mockdeck-right .fakeCard {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   height: 170px;
 }
 

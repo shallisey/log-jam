@@ -5,7 +5,6 @@ const socket = socketIO.connect("http://localhost:4000");
 function App() {
   return (
     <div>
-      <p>Hello World!</p>
       <GameBoard />
     </div>
   );

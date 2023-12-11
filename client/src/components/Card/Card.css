@@ -1,7 +1,7 @@
 .scene {
   display: inline-block;
-  width: 170px;
-  height: 230px;
+  /* width: 170px;
+  height: 230px; */
   margin: 10px;
 }
 
@@ -13,6 +13,8 @@
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
+  width: 170px;
+  height: 230px;
 }
 
 .card.is-flipped {
