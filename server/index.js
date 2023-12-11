@@ -7,11 +7,15 @@ const http = require("http").Server(app);
 const cors = require("cors");
 const GameState = require("./classes/GameState");
 const Player = require("./classes/Player");
+const judgeDeck = require("./Decks/judgeDeck");
+const deck = require("./Decks/deck");
+
+//console.log ("DECK", deck)
 
 app.use(cors());
 
-const gameState = new GameState();
-console.log("gameState", gameState);
+const gameState = new GameState(deck, judgeDeck);
+//console.log("gameState", gameState);
 
 const socketIO = require("socket.io")(http, {
   cors: {
@@ -21,15 +25,20 @@ const socketIO = require("socket.io")(http, {
 
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
-
   gameState.addPlayer(new Player(socket.id, "new name"));
 
-  console.log(gameState);
+  //console.log(gameState);
 
   gameState.startTurn();
-  console.log(gameState);
+ 
 
-  socket.on("newPlayer", (data) => {});
+
+  socket.on("startGame", (data) => {
+    console.log("game has started");
+    gameState.startGame();
+    //console.log(gameState);
+
+  });
 
   socket.on("disconnect", () => {
     console.log("🔥: A user disconnected");

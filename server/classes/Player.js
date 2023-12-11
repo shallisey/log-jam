@@ -12,6 +12,10 @@ class Player {
     this.isJudge = bool;
     console.log(this.isJudge);
   }
+
+  addCard(card) {
+    this.cardsInHand.push(card);
+  }
 }
 
 module.exports = Player;
