@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
+import GameBoard from "./components/GameBoard/GameBoard";
+import Login from "./components/Login/Login";
 const socket = socketIO.connect("http://localhost:4000");
 
 socket.on("updateGameState", (args) => {
@@ -7,6 +9,8 @@ socket.on("updateGameState", (args) => {
 })
 
 function App() {
+  const [name, setName] = useState();
+
   const startGame = () => {
     console.log("start");
     socket.emit("startGame");
@@ -116,6 +120,8 @@ function App() {
 
   return (
     <div>
+      {!name && <Login setName={setName} />}
+      <GameBoard />
       <p>Hello {socket.id}!</p>
 
       <button onClick={() => startGame()} type="button">

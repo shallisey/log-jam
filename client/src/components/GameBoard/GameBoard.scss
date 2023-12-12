@@ -1,0 +1,77 @@
+.game-grid {
+  background-color: rgba(119, 136, 153, 0.708);
+  display: grid;
+  grid-template-columns: min-content max-content min-content 1fr;
+  grid-template-rows: min-content min-content min-content min-content;
+  /* grid-template-areas:
+    ".                mockdeck-top      ."
+    "mockdeck-left       .              mockdeck-right"
+    "mockdeck-left   played-cards       mockdeck-right"
+    ".               playerdeck-bottom  ."; */
+
+  grid-template-areas:
+    "mockdeck-left   mockdeck-top       mockdeck-right game-info"
+    "mockdeck-left   judge-card          mockdeck-right game-info"
+    "mockdeck-left   played-cards       mockdeck-right game-info"
+    "mockdeck-left   playerdeck-bottom  mockdeck-right game-info";
+}
+
+.mockdeck-top {
+  grid-area: mockdeck-top;
+}
+
+.judge-card {
+  grid-area: judge-card;
+  justify-self: center;
+}
+
+.mockdeck-right {
+  grid-area: mockdeck-right;
+}
+
+.played-cards {
+  grid-area: played-cards;
+  justify-self: center;
+}
+
+.playerdeck-bottom {
+  grid-area: playerdeck-bottom;
+}
+
+.mockdeck-left {
+  grid-area: mockdeck-left;
+}
+
+.mockdeck-top {
+  .fakeCard {
+    transform: rotate(180deg);
+    height: 12vh;
+    width: 18vh;
+    background-size: 18vh 24vh;
+    align-items: end;
+    justify-content: center;
+  }
+}
+
+.mockdeck-right {
+  .fakeCard {
+    height: 18vh;
+    width: 12vh;
+    background-size: 24vh 18vh;
+  }
+  svg {
+    transform: rotate(-90deg);
+  }
+}
+
+.mockdeck-left {
+  .fakeCard {
+    transform: rotate(180deg);
+    height: 18vh;
+    width: 12vh;
+    background-size: 24vh 18vh;
+  }
+  svg {
+    transform: rotate(-90deg);
+  }
+}

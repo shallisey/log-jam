@@ -1,0 +1,70 @@
+.scene {
+  display: inline-block;
+  /* width: 18vh;
+  height: 230px; */
+  margin: 1vh;
+  /* todo add justify content */
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1s;
+  width: 18vh;
+  height: 24vh;
+}
+
+.card svg {
+  /* margin-top: 50%; */
+  /* text-align: center;
+  display: block;
+  margin: auto; */
+}
+
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  backface-visibility: hidden;
+}
+
+.card__face--front {
+  background-image: radial-gradient(circle, white, #1e3050, black);
+  /* padding-top: 50%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-image: conic-gradient(
+    hsla(0, 100%, 50%, 0.53),
+    rgba(255, 255, 0, 0.53),
+    rgba(0, 128, 0, 0.53),
+    rgba(0, 0, 255, 0.53),
+    rgba(0, 0, 0, 0.53)
+  ); */
+}
+
+.judge {
+  .card__face--front {
+    background-image: radial-gradient(circle, white, #7c0202);
+  }
+  .card__face--back {
+    color: #7c0202;
+  }
+}
+
+.card__face--back {
+  background: whitesmoke;
+  transform: rotateY(180deg);
+  color: #1e3050;
+}
