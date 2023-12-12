@@ -11,7 +11,7 @@ class GameState {
     this.judgeDeck = judgeDeck;
     this.judgeDiscardPile = [];
     this.playerInfo = [];
-    this.gamePhase = null; // todo figure out phase of game
+    this.gamePhase = {}; // todo figure out phase of game
     this.judge = null; // this will be the players socketid
     this.judgeCard = null;
     this.indexOfJudge = 0;
@@ -160,7 +160,24 @@ class GameState {
 
   pickWinner() {}
 
-  shuffleDeck(deck) {}
+  removeCardFromDeck(deck) {
+    deck.pop();
+  }
+
+  deckDraw() {
+    for (let cardsDealt = 0; cardsDealt < 5; cardsDealt++)
+      this.playerInfo.forEach((player) => {
+        let drawCard = this.playerDeck.length - 1;
+        player.addCard(this.playerDeck[drawCard]);
+        this.removeCardFromDeck(this.playerDeck);
+      });
+  }
+
+  dealPlayerDeck() {}
+
+  getPlayers() {
+    return this.playerInfo;
+  }
 
   checkIfWinner() {
     const pointsToWin = 2;
@@ -176,10 +193,37 @@ class GameState {
 
     return false;
   }
+  shuffleDeck(array) {
+    let currentIndex = array.length,
+      randomIndex;
 
-  startGame() {}
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
 
   endGame() {}
+  startGame() {
+    if (true) {
+      this.deck = this.shuffleDeck(this.playerDeck);
+      this.judgeDeck = this.shuffleDeck(this.judgeDeck);
+      this.deckDraw();
+      console.log("CARDS IN HAND \n\n\n\n\n", this.playerInfo[0].cardsInHand);
+    } else {
+      //error out that game size isn't correct
+    }
+  }
 }
 
 module.exports = GameState;

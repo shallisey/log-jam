@@ -13,7 +13,7 @@ const deck = require("./Decks/deck");
 app.use(cors());
 
 const gameState = new GameState(deck, judgeDeck);
-console.log("gameState", gameState);
+//console.log("gameState", gameState);
 
 const socketIO = require("socket.io")(http, {
   cors: {
@@ -23,7 +23,6 @@ const socketIO = require("socket.io")(http, {
 
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
-
   gameState.addPlayer(new Player(socket.id, "new name"));
 
   socket.on("newPlayer", (data) => {});
@@ -31,18 +30,8 @@ socketIO.on("connection", (socket) => {
   socket.on("startTurn", () => {
     gameState.startTurn(socketIO);
 
-    // send the judge card to everyone
-    // socketIO.emit("judgeCard", {
-    //   judgeCard: gameState.judgeCard,
-    //   judge: gameState.judge,
-    // });
-
     // loop through the players and send them their info
     gameState.playerInfo.forEach((player, idx) => {
-      // TODO: Actually have cards to send
-      const cards = [deck[idx], deck[idx + 2]];
-      // TODO: REMOVE THIS BECAUSE CARDS SHOULD ALREADY BE IN HAND
-      player.cardsInHand = cards;
       socketIO.to(player.socketId).emit("playerCards", {
         cards: player.cardsInHand,
         socketId: player.socketId,
@@ -156,16 +145,31 @@ socketIO.on("connection", (socket) => {
     gameState.endTurn(socketIO);
   });
 
+  socket.on("startGame", (data) => {
+    console.log("game has started");
+    gameState.startGame();
+    //console.log(gameState);
+    updatePlayers(gameState);
+  });
+
   socket.on("disconnect", () => {
     console.log("🔥: A user disconnected");
   });
 });
 
-app.get("/api", (req, res) => {
-  res.json({
-    message: "Hello world",
+const updatePlayers = (myGameState) => {
+  let playerList = myGameState.getPlayers();
+
+  playerList.forEach((player) => {
+    let secretGameState = {
+      ...myGameState,
+      playerInfo: myGameState.matchPlayerToSocketId(player.socketId),
+    };
+    socketIO
+      .to(player.socketId)
+      .emit("updateGameState", { gameState: secretGameState });
   });
-});
+};
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

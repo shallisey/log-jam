@@ -3,6 +3,11 @@ import socketIO from "socket.io-client";
 const socket = socketIO.connect("http://localhost:4000");
 
 function App() {
+  const startGame = () => {
+    console.log("TEST");
+    socket.emit("startGame");
+  };
+
   const startTurn = () => {
     socket.emit("startTurn");
   };
@@ -104,6 +109,10 @@ function App() {
   return (
     <div>
       <p>Hello {socket.id}!</p>
+
+      <button onClick={() => startGame()} type="button">
+        Click Me!
+      </button>
 
       {!turn && <button onClick={startTurn}>START TURN</button>}
 
