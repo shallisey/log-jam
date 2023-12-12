@@ -8,6 +8,7 @@ const Card = ({
   isPlayerJudge,
   playedCardArea,
   canJudgePick,
+  deckSize
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -28,13 +29,19 @@ const Card = ({
     console.log("canJudgePick", canJudgePick);
     if ((isPlayerJudge && playedCardArea) || canJudgePick) {
       setIsFlipped(true);
-    } else if (!isPlayerJudge && !playedCardArea) {
+    }
+    if (!isPlayerJudge && !playedCardArea) {
       setIsFlipped(true);
     }
+
     if (!playedCardArea && isPlayerJudge) {
       setIsFlipped(false);
     }
-  }, [canJudgePick, playedCardArea, isPlayerJudge]);
+    if (playedCardArea && !isPlayerJudge && deckSize !== 3)
+    {
+      setIsFlipped(false);
+    } 
+  }, [canJudgePick, playedCardArea, isPlayerJudge, deckSize]);
 
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>

@@ -13,6 +13,7 @@ const Deck = ({
       {myCards?.map((card) => (
         <Card
           card={card}
+          deckSize={myCards.length}
           socket={socket}
           isPlayerJudge={isPlayerJudge}
           playedCardArea={playedCardArea}
