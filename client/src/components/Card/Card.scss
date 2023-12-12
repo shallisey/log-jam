@@ -54,7 +54,17 @@
   ); */
 }
 
+.judge {
+  .card__face--front {
+    background-image: radial-gradient(circle, white, #7c0202);
+  }
+  .card__face--back {
+    color: #7c0202;
+  }
+}
+
 .card__face--back {
-  background: slateblue;
+  background: whitesmoke;
   transform: rotateY(180deg);
+  color: #1e3050;
 }

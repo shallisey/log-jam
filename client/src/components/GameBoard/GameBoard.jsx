@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
+import GameInfo from "../GameInfo/GameInfo";
+import Card from "../Card/Card";
 import "./GameBoard.scss";
 
 const myCards = [
@@ -12,13 +14,25 @@ const myCards = [
 ];
 
 const GameBoard = () => {
+  const [judgeCard, setJudgeCard] = useState({
+    title: "Judge Card",
+    content: "content Judge",
+  });
+
   return (
     <div className="game-grid">
       <div className="mockdeck-top">
-        <MockDeck text="top" />
+        <MockDeck />
       </div>
       <div className="mockdeck-right">
-        <MockDeck text="right" />
+        <MockDeck />
+      </div>
+      <div className="judge-card">
+        <Card
+          title={judgeCard.title}
+          content={judgeCard.content}
+          isJudge={true}
+        />
       </div>
       <div className="played-cards">
         <Deck myCards={myCards.slice(0, 4)} />
@@ -27,12 +41,9 @@ const GameBoard = () => {
         <Deck myCards={myCards} />
       </div>
       <div className="mockdeck-left">
-        <MockDeck text="left" />
+        <MockDeck />
       </div>
-      <div className="game-info">
-        <h1>Hello World I'm LogJam!</h1>
-        Game Info
-      </div>
+      <GameInfo />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 .game-grid {
+  background-color: rgba(119, 136, 153, 0.708);
   display: grid;
   grid-template-columns: min-content max-content min-content 1fr;
   grid-template-rows: min-content min-content min-content min-content;
@@ -10,13 +11,18 @@
 
   grid-template-areas:
     "mockdeck-left   mockdeck-top       mockdeck-right game-info"
-    "mockdeck-left       .              mockdeck-right game-info"
+    "mockdeck-left   judge-card          mockdeck-right game-info"
     "mockdeck-left   played-cards       mockdeck-right game-info"
     "mockdeck-left   playerdeck-bottom  mockdeck-right game-info";
 }
 
 .mockdeck-top {
   grid-area: mockdeck-top;
+}
+
+.judge-card {
+  grid-area: judge-card;
+  justify-self: center;
 }
 
 .mockdeck-right {
@@ -34,12 +40,6 @@
 
 .mockdeck-left {
   grid-area: mockdeck-left;
-}
-
-.game-info {
-  grid-area: game-info;
-  background-color: aqua;
-  margin: 10px;
 }
 
 .mockdeck-top {
