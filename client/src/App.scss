@@ -9,7 +9,6 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  cursor: pointer;
   display: block;
   color: white;
   font-weight: bolder;
@@ -24,6 +23,7 @@
   margin-top: 25vh;
   border-radius: 20px;
   button {
+    cursor: pointer;
     margin-top: 20px;
     border-radius: 5px;
     font-size: 16px;
@@ -33,12 +33,5 @@
     font-weight: bolder;
     border-color: transparent;
     margin: 5px;
-  }
-  .join-game-btn {
-    display: block;
-  }
-  input {
-    font-size: 1em;
-    display: block;
   }
 }
