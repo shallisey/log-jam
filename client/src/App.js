@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
-import Login from "./components/Login/Login";
+import Modal from "./components/Modal/Modal";
 
 function App() {
-  const [name, setName] = useState();
   const [socket, setSocket] = useState(null);
   const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
   const [turn, setTurn] = useState(false);
@@ -17,7 +16,7 @@ function App() {
       socket?.on("WINNER_FOUND", (data) => {
         console.log("data", data);
       });
-      
+
       socket?.on("judgePickedCardResponse", (data) => {
         setCardHasBeenPicked(true);
       });
@@ -35,13 +34,11 @@ function App() {
   }, [socket]);
 
   const startGame = () => {
-    console.log("start");
     socket.emit("startGame");
   };
   const endGame = () => {
-    console.log("end");
     socket.emit("endGame");
-  }
+  };
 
   const startTurn = () => {
     socket.emit("startTurn");
@@ -50,17 +47,13 @@ function App() {
   const startNextTurn = () => {
     socket.emit("startTurn");
   };
-  
 
   return (
     <div>
-      {/* {!name && <Login setName={setName} />} */}
       <GameBoard socket={socket} />
       <p>Hello {socket?.id}!</p>
 
-      <button onClick={() => startGame()} type="button">
-        Start!
-      </button>
+      {/* <Modal clickEvent={startGame} /> */}
       <button onClick={() => endGame()} type="button">
         End!
       </button>
@@ -79,7 +72,6 @@ function App() {
           <div>
             <h2>JUDGE:</h2>
           </div>
-
 
           <br />
           <div>
