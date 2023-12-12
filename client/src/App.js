@@ -69,12 +69,14 @@ function App() {
 
   useEffect(() => {
     socket.on("startTurnResponse", (data) => {
+      console.log("socket.on startTurnResponse", data);
       setTurn(true);
     });
   }, [socket, userCards]);
 
   useEffect(() => {
     socket.on("playerCards", (data) => {
+      console.log("socket.on playerCards", data);
       const { cards, socketId } = data;
       setUserCards(cards);
     });
@@ -83,6 +85,7 @@ function App() {
   useEffect(() => {
     socket.on("judgeCard", (data) => {
       const { judge, judgeCard } = data;
+      console.log("socket.on judgeCard", data);
       setJudge(judge);
       setJudgeCard(judgeCard);
     });
@@ -90,12 +93,14 @@ function App() {
 
   useEffect(() => {
     socket.on("judgePickedCardResponse", (data) => {
+      console.log("socket.on judgePickedCardResponse", data);
       setCardHasBeenPicked(true);
     });
   }, [socket, cardHasBeenPicked]);
 
   useEffect(() => {
     socket.on("fieldCardsUpdate", (data) => {
+      console.log("socket.on fieldCardsUpdate", data);
       setFieldCards(data);
     });
   }, [socket, fieldCards]);
@@ -105,6 +110,7 @@ function App() {
       if (!data.playedCard) {
         console.log("SOMETHING WENT WRONG: ", data.message);
       }
+      console.log("socket.on playerCardResponse", data);
     });
   }, []);
 
@@ -112,7 +118,7 @@ function App() {
 
   return (
     <div>
-      {!name && <Login setName={setName} />}
+      {/* {!name && <Login setName={setName} />} */}
       <GameBoard />
       <p>Hello {socket.id}!</p>
 
