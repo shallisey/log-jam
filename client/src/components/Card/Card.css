@@ -17,6 +17,10 @@
   height: 230px;
 }
 
+.card svg {
+  margin-top: 50%;
+}
+
 .card.is-flipped {
   transform: translateX(-100%) rotateY(-180deg);
 }
@@ -32,7 +36,14 @@
 }
 
 .card__face--front {
-  background: crimson;
+  background-image: radial-gradient(circle, white, #1e3050, black);
+  /* background-image: conic-gradient(
+    hsla(0, 100%, 50%, 0.53),
+    rgba(255, 255, 0, 0.53),
+    rgba(0, 128, 0, 0.53),
+    rgba(0, 0, 255, 0.53),
+    rgba(0, 0, 0, 0.53)
+  ); */
 }
 
 .card__face--back {

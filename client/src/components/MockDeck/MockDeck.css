@@ -1,7 +1,11 @@
 .fakeCard {
   display: inline-block;
-  width: 170px;
-  height: 230px;
   margin: 10px;
-  background-color: crimson;
+  background-image: radial-gradient(circle, white, #1e3050, black);
 }
+
+/* .fakeCard svg {
+  /* margin: auto; 
+  width: 100%;
+  transform: rotate(90deg);
+} */

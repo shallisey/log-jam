@@ -25,6 +25,7 @@
 
 .played-cards {
   grid-area: played-cards;
+  justify-self: center;
 }
 
 .playerdeck-bottom {
@@ -43,15 +44,43 @@
 
 .mockdeck-top .fakeCard {
   transform: rotate(180deg);
-  height: 170px;
+  height: 115px;
+  width: 170px;
+  background-size: 170px 230px;
+}
+
+.mockdeck-top svg {
+  margin-top: 30%;
+  /* ? todo why 30 */
+  width: 100%;
 }
 
 .mockdeck-right .fakeCard {
-  transform: rotate(-90deg);
+  /* transform: rotate(-90deg); */
   height: 170px;
+  width: 115px;
+  background-size: 230px 170px;
+}
+
+.mockdeck-right svg {
+  width: 168px;
+  margin-top: 42%;
+  /* TODO come back to percentages */
+  transform: rotate(-90deg);
+  /* ? todo why 30 */
+  /* width: 140%; */
 }
 
 .mockdeck-left .fakeCard {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
   height: 170px;
+  width: 115px;
+  background-size: 230px 170px;
+}
+
+.mockdeck-left svg {
+  width: 168px;
+  margin-top: 42%;
+  /* TODO come back to percentages */
+  transform: rotate(-90deg);
 }
