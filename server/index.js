@@ -213,7 +213,7 @@ socketIO.on("connection", (socket) => {
     socketIO.emit("gameStarted");
     setTimeout(() => {
       startTheTurn();
-    }, 5000);
+    }, 2000);
   });
 
   socket.on("endGame", (data) => {
