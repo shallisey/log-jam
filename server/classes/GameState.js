@@ -135,7 +135,7 @@ class GameState {
   }
 
   checkIfWinner() {
-    const pointsToWin = 20;
+    const pointsToWin = 2;
 
     for (let index = 0; index < this.playerInfo.length; index++) {
       const player = this.playerInfo[index];

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
-import Modal from "./components/Modal/Modal";
+import "./App.scss";
 
 function App() {
   const [socket, setSocket] = useState(null);
@@ -40,9 +40,9 @@ function App() {
   }, [socket]);
 
   const startGame = () => {
-    console.log("start");
-    socket.emit("startGame");
+    socket?.emit("startGame");
   };
+
   const endGame = () => {
     console.log("end");
     socket.emit("endGame");
@@ -68,19 +68,23 @@ function App() {
       </div>
       <div>
         {!gameHasStarted && (
-          <button onClick={() => startGame()}>Start game</button>
+          <div className="modal-container">
+            <div className="modal">
+              <button onClick={() => startGame()}>Start Game!</button>
+            </div>
+          </div>
+        )}
+        {winner?.winnningPlayer && (
+          <div className="modal-container">
+            <div className="modal">
+              <h3>Player {winner?.winnningPlayer?.socketId} Won!</h3>
+            </div>
+          </div>
         )}
       </div>
       <div>
-        {/* {!name && <Login setName={setName} />} */}
         <GameBoard socket={socket} />
-        <p>Hello {socket?.id}!</p>
       </div>
-
-      <button onClick={() => endGame()} type="button">
-        End!
-      </button>
-
       {cardHasBeenPicked && (
         <>
           <br />
