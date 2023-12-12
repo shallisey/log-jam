@@ -2,10 +2,44 @@ import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
 import Login from "./components/Login/Login";
-const socket = socketIO.connect("http://localhost:4000");
 
 function App() {
   const [name, setName] = useState();
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    if (socket === null) {
+      setSocket(socketIO.connect("http://localhost:4000"));
+    } else {
+      socket?.on("WINNER_FOUND", (data) => {
+        console.log("data", data);
+      });
+
+      socket?.on("judgeCanPick", (data) => {
+        setCanJudgePick(data);
+      });
+
+      socket?.on("startTurnResponse", (data) => {
+        setTurn(true);
+      });
+
+      socket?.on("judgeCard", (data) => {
+        const { judge, judgeCard } = data;
+        setJudge(judge);
+        setJudgeCard(judgeCard);
+      });
+
+      socket?.on("judgePickedCardResponse", (data) => {
+        setCardHasBeenPicked(true);
+      });
+
+      socket?.on("playCardResponse", (data) => {
+        if (!data.playedCard) {
+          console.log("SOMETHING WENT WRONG: ", data.message);
+        }
+      });
+    }
+  }, [socket]);
 
   const startGame = () => {
     console.log("TEST");
@@ -16,12 +50,6 @@ function App() {
     socket.emit("startTurn");
   };
 
-  const playCard = (card) => {
-    socket.emit("playCard", {
-      cardToPlay: card,
-    });
-  };
-
   const judgePickedCard = (card) => {
     socket.emit("judgePickedCard", {
       judgePickedCard: card,
@@ -29,13 +57,8 @@ function App() {
   };
 
   const startNextTurn = () => {
-    resetForTurn();
-
     socket.emit("startTurn");
   };
-
-  const [userCards, setUserCards] = useState([]);
-  const [fieldCards, setFieldCards] = useState([]);
 
   const [judge, setJudge] = useState("");
   const [canJudgePick, setCanJudgePick] = useState(false);
@@ -45,76 +68,13 @@ function App() {
   const [turn, setTurn] = useState(false);
   const [winner, setWinner] = useState({});
 
-  const resetForTurn = () => {
-    // setUserCards([]);
-    setFieldCards([]);
-    setJudge("");
-    setJudgeCard({ type: null, content: null });
-    setTurn(false);
-    setCanJudgePick(false);
-    setCardHasBeenPicked(false);
-  };
-
-  useEffect(() => {
-    socket.on("WINNER_FOUND", (data) => {
-      console.log("data", data);
-    });
-  }, [socket, winner]);
-
-  useEffect(() => {
-    socket.on("judgeCanPick", (data) => {
-      setCanJudgePick(data);
-    });
-  }, [socket, canJudgePick]);
-
-  useEffect(() => {
-    socket.on("startTurnResponse", (data) => {
-      setTurn(true);
-    });
-  }, [socket, userCards]);
-
-  useEffect(() => {
-    socket.on("playerCards", (data) => {
-      const { cards, socketId } = data;
-      setUserCards(cards);
-    });
-  }, [socket, userCards]);
-
-  useEffect(() => {
-    socket.on("judgeCard", (data) => {
-      const { judge, judgeCard } = data;
-      setJudge(judge);
-      setJudgeCard(judgeCard);
-    });
-  }, [socket, judge, judgeCard]);
-
-  useEffect(() => {
-    socket.on("judgePickedCardResponse", (data) => {
-      setCardHasBeenPicked(true);
-    });
-  }, [socket, cardHasBeenPicked]);
-
-  useEffect(() => {
-    socket.on("fieldCardsUpdate", (data) => {
-      setFieldCards(data);
-    });
-  }, [socket, fieldCards]);
-
-  useEffect(() => {
-    socket.on("playCardResponse", (data) => {
-      if (!data.playedCard) {
-        console.log("SOMETHING WENT WRONG: ", data.message);
-      }
-    });
-  }, []);
-
-  const isPlayerJudge = socket.id === judge;
+  const isPlayerJudge = socket?.id === judge;
 
   return (
     <div>
-      {!name && <Login setName={setName} />}
-      <GameBoard />
-      <p>Hello {socket.id}!</p>
+      {/* {!name && <Login setName={setName} />} */}
+      <GameBoard socket={socket} />
+      <p>Hello {socket?.id}!</p>
 
       <button onClick={() => startGame()} type="button">
         Click Me!
@@ -143,7 +103,7 @@ function App() {
 
           <br />
           <div>
-            {fieldCards.length > 0 && (
+            {/* {fieldCards.length > 0 && (
               <div>
                 <h1>FIELD CARDS</h1>
                 <div>
@@ -166,11 +126,11 @@ function App() {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
           </div>
           <br />
 
-          {userCards.length > 0 && (
+          {/* {userCards.length > 0 && (
             <>
               <h1>YOUR CARDS</h1>
               {userCards.map((card, i) => (
@@ -189,7 +149,7 @@ function App() {
                 </>
               ))}
             </>
-          )}
+          )} */}
         </>
       )}
     </div>

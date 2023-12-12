@@ -1,11 +1,11 @@
 import React from "react";
 import Card from "../Card/Card";
 
-const Deck = ({ myCards }) => {
+const Deck = ({ myCards, socket }) => {
   return (
     <div>
       {myCards?.map((card) => (
-        <Card title={card.title} content={card.content} />
+        <Card title={card.type} content={card.content} socket={socket} />
       ))}
     </div>
   );

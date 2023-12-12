@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import "./Card.scss";
 
-const Card = ({ title, content, deckType, isJudge }) => {
+const Card = ({ title, content, deckType, isJudge, socket }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const playCard = (card) => {
+    socket?.emit("playCard", {
+      cardToPlay: card,
+    });
+  };
 
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>
       <div
-        class={!isFlipped ? "card" : "card is-flipped"}
-        onClick={() => setIsFlipped(!isFlipped)}
+        class={isFlipped ? "card" : "card is-flipped"}
+        onClick={() => playCard({ type: title, content: content })}
+        //setIsFlipped(!isFlipped)}
       >
         <div class="card__face card__face--front">
           <svg
