@@ -77,7 +77,11 @@ function App() {
         {winner?.winnningPlayer && (
           <div className="modal-container">
             <div className="modal">
-              <h3>Player {winner?.winnningPlayer?.socketId} Won!</h3>
+              {socket.id === winner?.winnningPlayer?.socketId ? (
+                <h3>You Won!</h3>
+              ) : (
+                <h3>Player {winner?.winnningPlayer?.socketId} Won!</h3>
+              )}
             </div>
           </div>
         )}
@@ -85,12 +89,6 @@ function App() {
       <div>
         <GameBoard socket={socket} />
       </div>
-      {cardHasBeenPicked && (
-        <>
-          <br />
-          <button onClick={startNextTurn}>Start Next Turn</button>
-        </>
-      )}
     </div>
   );
 }
