@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
-import Login from "./components/Login/Login";
+import Modal from "./components/Modal/Modal";
 
 function App() {
-  const [name, setName] = useState();
   const [socket, setSocket] = useState(null);
   const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
   const [turn, setTurn] = useState(false);

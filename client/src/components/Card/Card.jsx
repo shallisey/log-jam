@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Card.scss";
 
-const Card = ({ card, isJudge, socket, isPlayerJudge, playedCardArea, canJudgePick }) => {
+const Card = ({
+  card,
+  isJudge,
+  socket,
+  isPlayerJudge,
+  playedCardArea,
+  canJudgePick,
+}) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const playCard = (card) => {
@@ -15,18 +22,26 @@ const Card = ({ card, isJudge, socket, isPlayerJudge, playedCardArea, canJudgePi
     socket.emit("judgePickedCard", {
       judgePickedCard: card,
     });
-  }
+  };
+
+  useEffect(() => {
+    console.log("canJudgePick", canJudgePick);
+    if ((isPlayerJudge && playedCardArea) || canJudgePick) {
+      setIsFlipped(true);
+    } else if (!isPlayerJudge && !playedCardArea) {
+      setIsFlipped(true);
+    }
+  }, [canJudgePick, playedCardArea, isJudge]);
 
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>
       <div
-        class={isFlipped ? "card" : "card is-flipped"}
+        class={!isFlipped ? "card" : "card is-flipped"}
         onClick={() => {
-          if(playedCardArea && isPlayerJudge && canJudgePick) {
-            judgePickedCard(card)
-          }
-          else{
-          !isPlayerJudge && playCard(card)
+          if (playedCardArea && isPlayerJudge && canJudgePick) {
+            judgePickedCard(card);
+          } else {
+            !isPlayerJudge && playCard(card);
           }
         }}
         //setIsFlipped(!isFlipped)}

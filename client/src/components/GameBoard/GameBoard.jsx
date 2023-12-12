@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
-import GameInfo from "../GameInfo/GameInfo";
 import Card from "../Card/Card";
 import "./GameBoard.scss";
 
