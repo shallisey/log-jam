@@ -47,12 +47,9 @@
     transform: rotate(180deg);
     height: 12vh;
     width: 18vh;
-    background-size: 18vh 230px;
-  }
-  svg {
-    margin-top: 30%;
-    /* ? todo why 30 */
-    width: 100%;
+    background-size: 18vh 24vh;
+    align-items: end;
+    justify-content: center;
   }
 }
 
@@ -60,24 +57,7 @@
   .fakeCard {
     height: 18vh;
     width: 12vh;
-    background-size: 230px 18vh;
-
-    // &:nth-child(1) {
-    //   transform: translate(20px);
-    //   transform: rotate(25deg);
-    // }
-    // &:nth-child(2) {
-    //   transform: rotate(50deg);
-    // }
-    // &:nth-child(3) {
-    //   transform: rotate(0deg);
-    // }
-    // &:nth-child(4) {
-    //   transform: rotate(-25deg);
-    // }
-    // &:nth-child(5) {
-    //   transform: rotate(-50deg);
-    // }
+    background-size: 24vh 18vh;
   }
   svg {
     transform: rotate(-90deg);
@@ -89,7 +69,7 @@
     transform: rotate(180deg);
     height: 18vh;
     width: 12vh;
-    background-size: 230px 18vh;
+    background-size: 24vh 18vh;
   }
   svg {
     transform: rotate(-90deg);
