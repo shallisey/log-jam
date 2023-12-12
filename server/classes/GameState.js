@@ -115,11 +115,11 @@ class GameState {
     // move cards from field to discard pile
     this.discard();
     //this.checkIfWinner
-    if (this.checkIfWinner()) {
-      socketIO.emit("WINNER_FOUND", {
-        winnningPlayer: { ...this.winner },
-      });
-    }
+    // if (this.checkIfWinner()) {
+    //   socketIO.emit("WINNER_FOUND", {
+    //     winnningPlayer: { ...this.winner },
+    //   });
+    // }
 
     // cleanup (update judge info, deal to players)
     this.cleanupEndOfTurn(socketIO);
@@ -146,13 +146,13 @@ class GameState {
       player.cardsInHand = player.cardsInHand.push(card);
 
       // send updated cards to player
-      socketIO.to(player.socketId).emit(
-        ("playerCards",
-        {
-          cards: player.cardsInHand,
-          socketId: player.socketId,
-        })
-      );
+      // socketIO.to(player.socketId).emit(
+      //   ("playerCards",
+      //   {
+      //     cards: player.cardsInHand,
+      //     socketId: player.socketId,
+      //   })
+      // );
     }
   }
 
