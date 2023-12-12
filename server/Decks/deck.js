@@ -1,4 +1,5 @@
 const deck = [
+
     {
         type: "Dependencies",
         content: "The snowman will come to life and request a top hat and a carrot nose upgrade."
