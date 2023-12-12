@@ -27,17 +27,26 @@ socketIO.on("connection", (socket) => {
   gameState.playerInfo[0].setHost(true);
  
 
-  socket.on("newPlayer", (data) => {});
+  socket.on("newPlayer", (data) => {
+    gameState.addPlayer(new Player(socket.id, "new name"));
+  });
 
   socket.on("startTurn", () => {
-    gameState.startTurn(socketIO);
+    gameState.startTurn();
+
+    socketIO.emit("judgeCard", {
+      judgeCard: gameState.judgeCard,
+      judge: gameState.judge,
+    });
 
     // loop through the players and send them their info
     gameState.playerInfo.forEach((player, idx) => {
-      socketIO.to(player.socketId).emit("playerCards", {
-        cards: player.cardsInHand,
-        socketId: player.socketId,
-      });
+      if (player.cardsInHand.length !== 0) {
+        socketIO.to(player.socketId).emit("playerCards", {
+          cards: player.cardsInHand,
+          socketId: player.socketId,
+        });
+      }
     });
 
     socketIO.emit("startTurnResponse", `starting the game for ${socket.id}`);
@@ -92,8 +101,7 @@ socketIO.on("connection", (socket) => {
       playerSocketId: player.socketId,
     });
 
-    // send everyone the updated field cards
-    socketIO.emit("fieldCardsUpdate", gameState.field);
+    gameState.sendFieldCardsToEveryone(socketIO);
 
     // send a response to user that that succesfully played their card
     socket.emit("playCardResponse", {
@@ -144,8 +152,51 @@ socketIO.on("connection", (socket) => {
       message: "Judge picked card was found",
     });
 
-    gameState.endTurn(socketIO);
+    // THIS IS WHERE THE END TURN LOGIC STARTS
+
+    // gameState.endTurn(socketIO);
+    gameState.discard();
+    //gameState.checkIfWinner
+    if (gameState.checkIfWinner()) {
+      socketIO.emit("WINNER_FOUND", {
+        winnningPlayer: { ...gameState.winner },
+      });
+    }
+
+    // remove judge, card and update judge index
+    const judge = gameState.matchPlayerToSocketId(gameState.judge);
+    judge.isJudge = false;
+    gameState.judge = null;
+    gameState.judgeCard = null;
+    gameState.indexOfJudge += 1;
+
+    // deal one card to each player
+    for (let index = 0; index < gameState.playerInfo.length; index++) {
+      const player = gameState.playerInfo[index];
+      if (player.isJudge) {
+        continue;
+      }
+
+      // add card to player hand
+      if (player.cardsInHand.length < 5) {
+        // draw card from deck
+        const card = gameState.playerDeck[gameState.playerDeck.length - 1];
+        gameState.removeCardFromDeck(gameState.playerDeck);
+        player.cardsInHand.push(card);
+      }
+
+      // send updated cards to player
+      socketIO.to(player.socketId).emit("playerCards", {
+        cards: player.cardsInHand,
+        socketId: player.socketId,
+      });
+    }
+
+    // sending updated field
+    socketIO.emit("fieldCardsUpdate", gameState.field);
   });
+
+  socket.on("endTurn", () => {});
 
   socket.on("startGame", (data) => {
     console.log("game has started");

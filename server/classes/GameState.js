@@ -40,11 +40,6 @@ class GameState {
     // have judge draw card
 
     this.drawJudgeCard();
-
-    socketIO.emit("judgeCard", {
-      judgeCard: this.judgeCard,
-      judge: this.judge,
-    });
   }
 
   drawJudgeCard() {
@@ -114,52 +109,9 @@ class GameState {
     this.judgeCard = null;
   }
 
-  endTurn(socketIO) {
-    //update player hands
-
-    //  discard cards
-    // move cards from field to discard pile
-    this.discard();
-    //this.checkIfWinner
-    // if (this.checkIfWinner()) {
-    //   socketIO.emit("WINNER_FOUND", {
-    //     winnningPlayer: { ...this.winner },
-    //   });
-    // }
-
-    // cleanup (update judge info, deal to players)
-    this.cleanupEndOfTurn(socketIO);
-  }
-
-  cleanupEndOfTurn(socketIO) {
-    // remove judge, card and update judge index
-    this.judge = null;
-    this.judgeCard = null;
-    this.indexOfJudge += 1;
-
-    // deal one card to each player
-    for (let index = 0; index < this.playerInfo.length; index++) {
-      const player = this.playerInfo[index];
-      if (player.isJudge) {
-        continue;
-      }
-
-      // draw card from deck
-      const card = this.playerDeck[this.playerDeck.length - 1];
-      this.removeCardFromDeck(this.playerDeck);
-
-      // add card to player hand
-      player.cardsInHand = player.cardsInHand.push(card);
-
-      // send updated cards to player
-      // socketIO.to(player.socketId).emit(
-      //   ("playerCards",
-      //   {
-      //     cards: player.cardsInHand,
-      //     socketId: player.socketId,
-      //   })
-      // );
-    }
+  sendFieldCardsToEveryone(socketIO) {
+    // send everyone the updated field cards
+    socketIO.emit("fieldCardsUpdate", this.field);
   }
 
   playCard() {}
