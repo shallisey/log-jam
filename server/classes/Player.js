@@ -10,6 +10,7 @@ class Player {
     this.socketId = socketId;
     this.username = username;
     this.hasPlayedCardThisTurn = false;
+    this.isHost = false;
   }
 
   setJudge(bool) {
@@ -31,7 +32,11 @@ class Player {
   }
 
   removeCardAtIndex(indexOfCard) {
-    this.cardsInHand = this.cardsInHand.splice(indexOfCard, 1);
+    this.cardsInHand.splice(indexOfCard, 1);
+  }
+
+  setHost (host) {
+    this.isHost = host;
   }
 }
 

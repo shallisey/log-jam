@@ -380,118 +380,118 @@ const deck = [
       "The winter-themed social media campaign will go viral and attract an unexpected following.",
   },
   {
-    Type: "Out of Scope",
-    Content: "Building a snowman army to take over the world",
+    type: "Out of Scope",
+    content: "Building a snowman army to take over the world",
   },
   {
-    Type: "Out of Scope",
-    Content: "Designing a rocket-powered sled to commute to work",
+    type: "Out of Scope",
+    content: "Designing a rocket-powered sled to commute to work",
   },
   {
-    Type: "Out of Scope",
-    Content: "Creating a machine that turns snowflakes into gold coins",
+    type: "Out of Scope",
+    content: "Creating a machine that turns snowflakes into gold coins",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing an algorithm to predict when it's going to snow next year",
   },
   {
-    Type: "Out of Scope",
-    Content: "Designing a robotic reindeer to replace Santa's sleigh",
+    type: "Out of Scope",
+    content: "Designing a robotic reindeer to replace Santa's sleigh",
   },
   {
-    Type: "Out of Scope",
-    Content: "Developing a 'Snowball Fight Simulator' video game",
+    type: "Out of Scope",
+    content: "Developing a 'Snowball Fight Simulator' video game",
   },
   {
-    Type: "Out of Scope",
-    Content: "Building an igloo with voice-activated heating controls",
+    type: "Out of Scope",
+    content: "Building an igloo with voice-activated heating controls",
   },
   {
-    Type: "Out of Scope",
-    Content: "Creating a snowflake-shaped drone that can deliver hot chocolate",
+    type: "Out of Scope",
+    content: "Creating a snowflake-shaped drone that can deliver hot chocolate",
   },
   {
-    Type: "Out of Scope",
-    Content: "Designing a snow shovel with built-in GPS and Wi-Fi connectivity",
+    type: "Out of Scope",
+    content: "Designing a snow shovel with built-in GPS and Wi-Fi connectivity",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing a snowball-throwing robot for impromptu snowball fights",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Creating a snowboarding video game that only works while actually snowboarding",
   },
   {
-    Type: "Out of Scope",
-    Content: "Building a snowman with self-repairing features",
+    type: "Out of Scope",
+    content: "Building a snowman with self-repairing features",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing a snowflake recognition app for identifying unique snowflakes",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Designing a snowball cannon that can hit targets up to a mile away",
   },
   {
-    Type: "Out of Scope",
-    Content: "Creating a snowmobile that can fly like a reindeer",
+    type: "Out of Scope",
+    content: "Creating a snowmobile that can fly like a reindeer",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing a snowball launcher with automatic aim and firing capabilities",
   },
   {
-    Type: "Out of Scope",
-    Content: "Building a snow fort with an integrated hot tub and sauna",
+    type: "Out of Scope",
+    content: "Building a snow fort with an integrated hot tub and sauna",
   },
   {
-    Type: "Out of Scope",
-    Content: "Designing a snowflake-themed fashion line for penguins",
+    type: "Out of Scope",
+    content: "Designing a snowflake-themed fashion line for penguins",
   },
   {
-    Type: "Out of Scope",
-    Content: "Creating a snowball-throwing robot that can hit moving targets",
+    type: "Out of Scope",
+    content: "Creating a snowball-throwing robot that can hit moving targets",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing a snowball-throwing machine that can break Guinness World Records",
   },
   {
-    Type: "Out of Scope",
-    Content: "Designing a snow plow that can clear driveways in a single pass",
+    type: "Out of Scope",
+    content: "Designing a snow plow that can clear driveways in a single pass",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Creating a snow maze for penguins to navigate and find their way back home",
   },
   {
-    Type: "Out of Scope",
-    Content: "Building a snowball-powered generator that produces electricity",
+    type: "Out of Scope",
+    content: "Building a snowball-powered generator that produces electricity",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Developing a snowball launcher that can be controlled remotely through a smartphone app",
   },
   {
-    Type: "Out of Scope",
-    Content:
+    type: "Out of Scope",
+    content:
       "Designing a snowboarding helmet with built-in speakers for playing music",
   },
   {
-    Type: "Out of Scope",
-    Content: "Creating a snowball-firing drone for epic snowball battles",
+    type: "Out of Scope",
+    content: "Creating a snowball-firing drone for epic snowball battles",
   },
   {
     type: "Risks",
@@ -619,172 +619,172 @@ const deck = [
       "Enabling the 'Winterize Music' feature might replace all songs with an endless loop of Christmas jingles, leading to a never-ending holiday season.",
   },
       {
-      "Type": "Blocked By",
-      "Content": "Thaw out Olaf"
+      "type": "Blocked By",
+      "content": "Thaw out Olaf"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Unfreeze Zamboni"
+      "type": "Blocked By",
+      "content": "Unfreeze Zamboni"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Find lost sled dogs"
+      "type": "Blocked By",
+      "content": "Find lost sled dogs"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Freeze keyboard"
+      "type": "Blocked By",
+      "content": "Freeze keyboard"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Clear the construction site from penguins"
+      "type": "Blocked By",
+      "content": "Clear the construction site from penguins"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Obtain snowball ammunition"
+      "type": "Blocked By",
+      "content": "Obtain snowball ammunition"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Unclog the chocolate fountain"
+      "type": "Blocked By",
+      "content": "Unclog the chocolate fountain"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Untangle the holiday lights on the ski lift"
+      "type": "Blocked By",
+      "content": "Untangle the holiday lights on the ski lift"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Attach angel wings to the snow"
+      "type": "Blocked By",
+      "content": "Attach angel wings to the snow"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Untangle the net from mischievous snow fairies"
+      "type": "Blocked By",
+      "content": "Untangle the net from mischievous snow fairies"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Clear the maze from Yeti infestation"
+      "type": "Blocked By",
+      "content": "Clear the maze from Yeti infestation"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Unfreeze the sculptor's imagination"
+      "type": "Blocked By",
+      "content": "Unfreeze the sculptor's imagination"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Align the launcher properly to avoid hitting Santa's sleigh"
+      "type": "Blocked By",
+      "content": "Align the launcher properly to avoid hitting Santa's sleigh"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Capture the sound of silent snowfall"
+      "type": "Blocked By",
+      "content": "Capture the sound of silent snowfall"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Negotiate ice resources with the Snow Queen"
+      "type": "Blocked By",
+      "content": "Negotiate ice resources with the Snow Queen"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Recruit professional snowboarders for realistic motion capture"
+      "type": "Blocked By",
+      "content": "Recruit professional snowboarders for realistic motion capture"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Train reindeer to navigate virtual landscapes"
+      "type": "Blocked By",
+      "content": "Train reindeer to navigate virtual landscapes"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Fix the disappearing ski lift cables"
+      "type": "Blocked By",
+      "content": "Fix the disappearing ski lift cables"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Reduce excessive glitter in the UI design"
+      "type": "Blocked By",
+      "content": "Reduce excessive glitter in the UI design"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Differentiate between actual snowflakes and frosty window patterns"
+      "type": "Blocked By",
+      "content": "Differentiate between actual snowflakes and frosty window patterns"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Find the elusive Zamboni driver"
+      "type": "Blocked By",
+      "content": "Find the elusive Zamboni driver"
     },
     {
-      "Type": "Blocked By",
-      "Content": "Bring back the polar bears from vacation"
+      "type": "Blocked By",
+      "content": "Bring back the polar bears from vacation"
     },
-  { "Type": "Stakeholder", "Content": "Jack Frost" }, 
-{ "Type": "Stakeholder", "Content": "Olaf the Snowman" }, 
-{ "Type": "Stakeholder", "Content": "Ice Queen Elsa" }, 
-{ "Type": "Stakeholder", "Content": "Santa Claus" }, 
-{ "Type": "Stakeholder", "Content": "Abominable Snowman" }, 
-{ "Type": "Stakeholder", "Content": "Penguin Gang" }, 
-{ "Type": "Stakeholder", "Content": "Yeti" }, 
-{ "Type": "Stakeholder", "Content": "Snow White" }, 
-{ "Type": "Stakeholder", "Content": "Ice Sculptor" }, 
-{ "Type": "Stakeholder", "Content": "Ice Skating Champion" }, 
-{ "Type": "Stakeholder", "Content": "Snowboarding Enthusiast" }, 
-{ "Type": "Stakeholder", "Content": "Snowball Fight Champion" }, 
-{ "Type": "Stakeholder", "Content": "Hot Chocolate Connoisseur" }, 
-{ "Type": "Stakeholder", "Content": "Ski Resort Owner" }, 
-{ "Type": "Stakeholder", "Content": "Snow Globe Collector" }, 
-{ "Type": "Stakeholder", "Content": "Ice Fishing Expert" }, 
-{ "Type": "Stakeholder", "Content": "Sledding Fanatic" }, 
-{ "Type": "Stakeholder", "Content": "Snowflake Designer" }, 
-{ "Type": "Stakeholder", "Content": "Winter Fashionista" }, 
-{ "Type": "Stakeholder", "Content": "Snow Angel Expert" }, 
-{ "Type": "Stakeholder", "Content": "Snowball Architecture Guru" }, 
-{ "Type": "Stakeholder", "Content": "Curling Champion" }, 
-{ "Type": "Stakeholder", "Content": "Snowmobile Enthusiast" }, 
-{ "Type": "Stakeholder", "Content": "Snow Fort Architect" }, 
-{ "Type": "Stakeholder", "Content": "Ice Hockey Coach" }, 
-{ "Type": "Stakeholder", "Content": "Snowboarding Instructor" },
-  { "Type": "Assignee", "Content": "Frosty Frosterson" }, 
-{ "Type": "Assignee", "Content": "Snowflake Master" }, 
-{ "Type": "Assignee", "Content": "Icicle Whisperer" }, 
-{ "Type": "Assignee", "Content": "Winter Wizard" }, 
-{ "Type": "Assignee", "Content": "Arctic Architect" }, 
-{ "Type": "Assignee", "Content": "Blizzard Tamer" }, 
-{ "Type": "Assignee", "Content": "Snowball Sniper" }, 
-{ "Type": "Assignee", "Content": "Frozen Sculptor" }, 
-{ "Type": "Assignee", "Content": "Snowy Storyteller" }, 
-{ "Type": "Assignee", "Content": "Icy Innovator" }, 
-{ "Type": "Assignee", "Content": "Aurora Borealis Guru" }, 
-{ "Type": "Assignee", "Content": "Polar Pixel Painter" }, 
-{ "Type": "Assignee", "Content": "Igloo Guardian" }, 
-{ "Type": "Assignee", "Content": "Winter Wonderland Wizard" }, 
-{ "Type": "Assignee", "Content": "Penguin Whisperer" }, 
-{ "Type": "Assignee", "Content": "Snowflake Scientist" }, 
-{ "Type": "Assignee", "Content": "Sleigh Ride Engineer" }, 
-{ "Type": "Assignee", "Content": "Winter Fashion Maestro" }, 
-{ "Type": "Assignee", "Content": "Snowy Serenader" }, 
-{ "Type": "Assignee", "Content": "Ice Crystal Mage" }, 
-{ "Type": "Assignee", "Content": "Snowstorm Sorcerer" }, 
-{ "Type": "Assignee", "Content": "Blizzard Hunter" }, 
-{ "Type": "Assignee", "Content": "Frostbite Fixer" }, 
-{ "Type": "Assignee", "Content": "Northern Lights Navigator" }, 
-{ "Type": "Assignee", "Content": "Winter Whirlwind Wrangler" }, 
-{ "Type": "Assignee", "Content": "Snowy Peak Pioneer" }, 
-{ "Type": "Assignee", "Content": "Icy Adventure Architect" },
-  { "Type": "Signed Off By", "Content": "Snow Queen Elsa, Ruler of the Frozen Kingdom" }, 
-{ "Type": "Signed Off By", "Content": "Jack Frost, Guardian of Winter" }, 
-{ "Type": "Signed Off By", "Content": "Ice Sculptor Extraordinaire, Master of Frozen Art" }, 
-{ "Type": "Signed Off By", "Content": "Abominable Snowman, Legendary Arctic Creature" }, 
-{ "Type": "Signed Off By", "Content": "Winter Fashionista, Authority on Frosty Style" }, 
-{ "Type": "Signed Off By", "Content": "Penguin Gang Leader, Commander of the Antarctic Tribe" }, 
-{ "Type": "Signed Off By", "Content": "Snowflake Designer, Expert in Icy Patterns" }, 
-{ "Type": "Signed Off By", "Content": "Yeti, Legendary Snow Creature" }, 
-{ "Type": "Signed Off By", "Content": "Hot Chocolate Connoisseur, Master of Warmth and Delight" }, 
-{ "Type": "Signed Off By", "Content": "Ice Skating Champion, Master of Grace on Frozen Waters" }, 
-{ "Type": "Signed Off By", "Content": "Snowboarding Enthusiast, Authority on Snowy Slopes" }, 
-{ "Type": "Signed Off By", "Content": "Snow Globe Collector, Keeper of Wintry Wonderlands" }, 
-{ "Type": "Signed Off By", "Content": "Ski Resort Owner, Guardian of Alpine Adventure" }, 
-{ "Type": "Signed Off By", "Content": "Snow Angel Expert, Seraph of Frozen Poses" }, 
-{ "Type": "Signed Off By", "Content": "Snowball Fight Champion, Conqueror of Snowy Battles" }, 
-{ "Type": "Signed Off By", "Content": "Ice Fishing Expert, Master of Arctic Angling" }, 
-{ "Type": "Signed Off By", "Content": "Sledding Fanatic, Adventurer of Icy Slopes" }, 
-{ "Type": "Signed Off By", "Content": "Snowboarding Instructor, Guru of Shredding Snow" }, 
-{ "Type": "Signed Off By", "Content": "Snowmobile Enthusiast, Commander of Frozen Trails" }, 
-{ "Type": "Signed Off By", "Content": "Ice Hockey Coach, Mentor of Frozen Puck Skills" }, 
-{ "Type": "Signed Off By", "Content": "Snow Fort Architect, Designer of Subzero Structures" }, 
-{ "Type": "Signed Off By", "Content": "Curling Champion, Master of Precision on Ice" }, 
-{ "Type": "Signed Off By", "Content": "Winter Carnival Organizer, Director of Frosty Festivities" }, 
-{ "Type": "Signed Off By", "Content": "Yule Log Expert, Authority on Cozy Holiday Traditions" }, 
-{ "Type": "Signed Off By", "Content": "Ice Rink Manager, Supervisor of Glacial Skating Rinks" }, 
-{ "Type": "Signed Off By", "Content": "Snowman Builder, Creator of Frozen Friends" } 
+  { "type": "Stakeholder", "content": "Jack Frost" }, 
+{ "type": "Stakeholder", "content": "Olaf the Snowman" }, 
+{ "type": "Stakeholder", "content": "Ice Queen Elsa" }, 
+{ "type": "Stakeholder", "content": "Santa Claus" }, 
+{ "type": "Stakeholder", "content": "Abominable Snowman" }, 
+{ "type": "Stakeholder", "content": "Penguin Gang" }, 
+{ "type": "Stakeholder", "content": "Yeti" }, 
+{ "type": "Stakeholder", "content": "Snow White" }, 
+{ "type": "Stakeholder", "content": "Ice Sculptor" }, 
+{ "type": "Stakeholder", "content": "Ice Skating Champion" }, 
+{ "type": "Stakeholder", "content": "Snowboarding Enthusiast" }, 
+{ "type": "Stakeholder", "content": "Snowball Fight Champion" }, 
+{ "type": "Stakeholder", "content": "Hot Chocolate Connoisseur" }, 
+{ "type": "Stakeholder", "content": "Ski Resort Owner" }, 
+{ "type": "Stakeholder", "content": "Snow Globe Collector" }, 
+{ "type": "Stakeholder", "content": "Ice Fishing Expert" }, 
+{ "type": "Stakeholder", "content": "Sledding Fanatic" }, 
+{ "type": "Stakeholder", "content": "Snowflake Designer" }, 
+{ "type": "Stakeholder", "content": "Winter Fashionista" }, 
+{ "type": "Stakeholder", "content": "Snow Angel Expert" }, 
+{ "type": "Stakeholder", "content": "Snowball Architecture Guru" }, 
+{ "type": "Stakeholder", "content": "Curling Champion" }, 
+{ "type": "Stakeholder", "content": "Snowmobile Enthusiast" }, 
+{ "type": "Stakeholder", "content": "Snow Fort Architect" }, 
+{ "type": "Stakeholder", "content": "Ice Hockey Coach" }, 
+{ "type": "Stakeholder", "content": "Snowboarding Instructor" },
+  { "type": "Assignee", "content": "Frosty Frosterson" }, 
+{ "type": "Assignee", "content": "Snowflake Master" }, 
+{ "type": "Assignee", "content": "Icicle Whisperer" }, 
+{ "type": "Assignee", "content": "Winter Wizard" }, 
+{ "type": "Assignee", "content": "Arctic Architect" }, 
+{ "type": "Assignee", "content": "Blizzard Tamer" }, 
+{ "type": "Assignee", "content": "Snowball Sniper" }, 
+{ "type": "Assignee", "content": "Frozen Sculptor" }, 
+{ "type": "Assignee", "content": "Snowy Storyteller" }, 
+{ "type": "Assignee", "content": "Icy Innovator" }, 
+{ "type": "Assignee", "content": "Aurora Borealis Guru" }, 
+{ "type": "Assignee", "content": "Polar Pixel Painter" }, 
+{ "type": "Assignee", "content": "Igloo Guardian" }, 
+{ "type": "Assignee", "content": "Winter Wonderland Wizard" }, 
+{ "type": "Assignee", "content": "Penguin Whisperer" }, 
+{ "type": "Assignee", "content": "Snowflake Scientist" }, 
+{ "type": "Assignee", "content": "Sleigh Ride Engineer" }, 
+{ "type": "Assignee", "content": "Winter Fashion Maestro" }, 
+{ "type": "Assignee", "content": "Snowy Serenader" }, 
+{ "type": "Assignee", "content": "Ice Crystal Mage" }, 
+{ "type": "Assignee", "content": "Snowstorm Sorcerer" }, 
+{ "type": "Assignee", "content": "Blizzard Hunter" }, 
+{ "type": "Assignee", "content": "Frostbite Fixer" }, 
+{ "type": "Assignee", "content": "Northern Lights Navigator" }, 
+{ "type": "Assignee", "content": "Winter Whirlwind Wrangler" }, 
+{ "type": "Assignee", "content": "Snowy Peak Pioneer" }, 
+{ "type": "Assignee", "content": "Icy Adventure Architect" },
+  { "type": "Signed Off By", "content": "Snow Queen Elsa, Ruler of the Frozen Kingdom" }, 
+{ "type": "Signed Off By", "content": "Jack Frost, Guardian of Winter" }, 
+{ "type": "Signed Off By", "content": "Ice Sculptor Extraordinaire, Master of Frozen Art" }, 
+{ "type": "Signed Off By", "content": "Abominable Snowman, Legendary Arctic Creature" }, 
+{ "type": "Signed Off By", "content": "Winter Fashionista, Authority on Frosty Style" }, 
+{ "type": "Signed Off By", "content": "Penguin Gang Leader, Commander of the Antarctic Tribe" }, 
+{ "type": "Signed Off By", "content": "Snowflake Designer, Expert in Icy Patterns" }, 
+{ "type": "Signed Off By", "content": "Yeti, Legendary Snow Creature" }, 
+{ "type": "Signed Off By", "content": "Hot Chocolate Connoisseur, Master of Warmth and Delight" }, 
+{ "type": "Signed Off By", "content": "Ice Skating Champion, Master of Grace on Frozen Waters" }, 
+{ "type": "Signed Off By", "content": "Snowboarding Enthusiast, Authority on Snowy Slopes" }, 
+{ "type": "Signed Off By", "content": "Snow Globe Collector, Keeper of Wintry Wonderlands" }, 
+{ "type": "Signed Off By", "content": "Ski Resort Owner, Guardian of Alpine Adventure" }, 
+{ "type": "Signed Off By", "content": "Snow Angel Expert, Seraph of Frozen Poses" }, 
+{ "type": "Signed Off By", "content": "Snowball Fight Champion, Conqueror of Snowy Battles" }, 
+{ "type": "Signed Off By", "content": "Ice Fishing Expert, Master of Arctic Angling" }, 
+{ "type": "Signed Off By", "content": "Sledding Fanatic, Adventurer of Icy Slopes" }, 
+{ "type": "Signed Off By", "content": "Snowboarding Instructor, Guru of Shredding Snow" }, 
+{ "type": "Signed Off By", "content": "Snowmobile Enthusiast, Commander of Frozen Trails" }, 
+{ "type": "Signed Off By", "content": "Ice Hockey Coach, Mentor of Frozen Puck Skills" }, 
+{ "type": "Signed Off By", "content": "Snow Fort Architect, Designer of Subzero Structures" }, 
+{ "type": "Signed Off By", "content": "Curling Champion, Master of Precision on Ice" }, 
+{ "type": "Signed Off By", "content": "Winter Carnival Organizer, Director of Frosty Festivities" }, 
+{ "type": "Signed Off By", "content": "Yule Log Expert, Authority on Cozy Holiday Traditions" }, 
+{ "type": "Signed Off By", "content": "Ice Rink Manager, Supervisor of Glacial Skating Rinks" }, 
+{ "type": "Signed Off By", "content": "Snowman Builder, Creator of Frozen Friends" } 
 ];
 
 module.exports = deck;

@@ -6,12 +6,18 @@ const MAX_PLAYERS = 4;
 
 class GameState {
   constructor(deck = [], judgeDeck = [], playerInfo = []) {
+    this.gamePhases = Object.freeze({
+      START: "start",
+      READYFORTURN: "readyforturn",
+      TURN: "turn",
+      GAMEOVER: "gameover"
+    });
     this.playerDeck = deck;
     this.playerDiscardPile = [];
     this.judgeDeck = judgeDeck;
     this.judgeDiscardPile = [];
     this.playerInfo = [];
-    this.gamePhase = {}; // todo figure out phase of game
+    this.gamePhase = null;
     this.judge = null; // this will be the players socketid
     this.judgeCard = null;
     this.indexOfJudge = 0;
@@ -125,8 +131,6 @@ class GameState {
       });
   }
 
-  dealPlayerDeck() {}
-
   getPlayers() {
     return this.playerInfo;
   }
@@ -164,11 +168,10 @@ class GameState {
 
     return array;
   }
-
-  endGame() {}
   startGame() {
     if (true) {
-      this.deck = this.shuffleDeck(this.playerDeck);
+      this.gamePhase = this.gamePhases.START;
+      this.playerDeck = this.shuffleDeck(this.playerDeck);
       this.judgeDeck = this.shuffleDeck(this.judgeDeck);
       this.deckDraw();
       console.log("CARDS IN HAND \n\n\n\n\n", this.playerInfo[0].cardsInHand);

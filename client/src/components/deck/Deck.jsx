@@ -1,11 +1,11 @@
 import React from "react";
 import Card from "../Card/Card";
 
-const Deck = ({ myCards }) => {
+const Deck = ({ myCards, socket, isPlayerJudge, playedCardArea, canJudgePick  }) => {
   return (
     <div>
       {myCards?.map((card) => (
-        <Card title={card.title} content={card.content} />
+        <Card card={card} socket={socket} isPlayerJudge={isPlayerJudge}  playedCardArea={playedCardArea} canJudgePick={canJudgePick} />
       ))}
     </div>
   );

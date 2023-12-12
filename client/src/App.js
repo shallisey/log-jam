@@ -2,128 +2,67 @@ import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
 import Login from "./components/Login/Login";
-const socket = socketIO.connect("http://localhost:4000");
 
 function App() {
   const [name, setName] = useState();
+  const [socket, setSocket] = useState(null);
+  const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
+  const [turn, setTurn] = useState(false);
+  const [winner, setWinner] = useState({});
+
+  useEffect(() => {
+    if (socket === null) {
+      setSocket(socketIO.connect("http://localhost:4000"));
+    } else {
+      socket?.on("WINNER_FOUND", (data) => {
+        console.log("data", data);
+      });
+      
+      socket?.on("judgePickedCardResponse", (data) => {
+        setCardHasBeenPicked(true);
+      });
+
+      socket?.on("startTurnResponse", (data) => {
+        setTurn(true);
+      });
+
+      socket?.on("playCardResponse", (data) => {
+        if (!data.playedCard) {
+          console.log("SOMETHING WENT WRONG: ", data.message);
+        }
+      });
+    }
+  }, [socket]);
 
   const startGame = () => {
-    console.log("TEST");
+    console.log("start");
     socket.emit("startGame");
   };
+  const endGame = () => {
+    console.log("end");
+    socket.emit("endGame");
+  }
 
   const startTurn = () => {
     socket.emit("startTurn");
   };
 
-  const playCard = (card) => {
-    socket.emit("playCard", {
-      cardToPlay: card,
-    });
-  };
-
-  const judgePickedCard = (card) => {
-    socket.emit("judgePickedCard", {
-      judgePickedCard: card,
-    });
-  };
-
   const startNextTurn = () => {
-    resetForTurn();
-
     socket.emit("startTurn");
   };
-
-  const [userCards, setUserCards] = useState([]);
-  const [fieldCards, setFieldCards] = useState([]);
-
-  const [judge, setJudge] = useState("");
-  const [canJudgePick, setCanJudgePick] = useState(false);
-  const [judgeCard, setJudgeCard] = useState({ type: null, content: null });
-  const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
-
-  const [turn, setTurn] = useState(false);
-  const [winner, setWinner] = useState({});
-
-  const resetForTurn = () => {
-    // setUserCards([]);
-    setFieldCards([]);
-    setJudge("");
-    setJudgeCard({ type: null, content: null });
-    setTurn(false);
-    setCanJudgePick(false);
-    setCardHasBeenPicked(false);
-  };
-
-  useEffect(() => {
-    socket.on("WINNER_FOUND", (data) => {
-      console.log("data", data);
-    });
-  }, [socket, winner]);
-
-  useEffect(() => {
-    socket.on("judgeCanPick", (data) => {
-      setCanJudgePick(data);
-    });
-  }, [socket, canJudgePick]);
-
-  useEffect(() => {
-    socket.on("startTurnResponse", (data) => {
-      console.log("socket.on startTurnResponse", data);
-      setTurn(true);
-    });
-  }, [socket, userCards]);
-
-  useEffect(() => {
-    socket.on("playerCards", (data) => {
-      console.log("socket.on playerCards", data);
-      const { cards, socketId } = data;
-      setUserCards(cards);
-    });
-  }, [socket, userCards]);
-
-  useEffect(() => {
-    socket.on("judgeCard", (data) => {
-      const { judge, judgeCard } = data;
-      console.log("socket.on judgeCard", data);
-      setJudge(judge);
-      setJudgeCard(judgeCard);
-    });
-  }, [socket, judge, judgeCard]);
-
-  useEffect(() => {
-    socket.on("judgePickedCardResponse", (data) => {
-      console.log("socket.on judgePickedCardResponse", data);
-      setCardHasBeenPicked(true);
-    });
-  }, [socket, cardHasBeenPicked]);
-
-  useEffect(() => {
-    socket.on("fieldCardsUpdate", (data) => {
-      console.log("socket.on fieldCardsUpdate", data);
-      setFieldCards(data);
-    });
-  }, [socket, fieldCards]);
-
-  useEffect(() => {
-    socket.on("playCardResponse", (data) => {
-      if (!data.playedCard) {
-        console.log("SOMETHING WENT WRONG: ", data.message);
-      }
-      console.log("socket.on playerCardResponse", data);
-    });
-  }, []);
-
-  const isPlayerJudge = socket.id === judge;
+  
 
   return (
     <div>
       {/* {!name && <Login setName={setName} />} */}
-      <GameBoard />
-      <p>Hello {socket.id}!</p>
+      <GameBoard socket={socket} />
+      <p>Hello {socket?.id}!</p>
 
       <button onClick={() => startGame()} type="button">
-        Click Me!
+        Start!
+      </button>
+      <button onClick={() => endGame()} type="button">
+        End!
       </button>
 
       {!turn && <button onClick={startTurn}>START TURN</button>}
@@ -138,18 +77,13 @@ function App() {
       {turn && (
         <>
           <div>
-            <h2>JUDGE: {judge}</h2>
+            <h2>JUDGE:</h2>
           </div>
 
-          <div>
-            JUDGE CARD
-            {/* <h2>type: {judgeCard.type}</h2> */}
-            <p>content: {judgeCard.content}</p>
-          </div>
 
           <br />
           <div>
-            {fieldCards.length > 0 && (
+            {/* {fieldCards.length > 0 && (
               <div>
                 <h1>FIELD CARDS</h1>
                 <div>
@@ -172,11 +106,11 @@ function App() {
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
           </div>
           <br />
 
-          {userCards.length > 0 && (
+          {/* {userCards.length > 0 && (
             <>
               <h1>YOUR CARDS</h1>
               {userCards.map((card, i) => (
@@ -195,7 +129,7 @@ function App() {
                 </>
               ))}
             </>
-          )}
+          )} */}
         </>
       )}
     </div>
