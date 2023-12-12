@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
 import GameInfo from "../GameInfo/GameInfo";
 import Card from "../Card/Card";
 import "./GameBoard.scss";
 
-const myCards = [
-  { title: "title 1", content: "content 1" },
-  { title: "title 2", content: "content 2" },
-  { title: "title 3", content: "content 3" },
-  { title: "title 4", content: "content 4" },
-  { title: "title 5", content: "content 5" },
-];
-
-const GameBoard = () => {
+const GameBoard = ({ socket }) => {
   const [judgeCard, setJudgeCard] = useState({
     title: "Judge Card",
     content: "content Judge",
   });
+
+  const [userCards, setUserCards] = useState([]);
+  const [playedCards, setPlayedCards] = useState([]);
+
+  useEffect(() => {
+    if (socket !== null) {
+      socket?.on("playerCards", (data) => {
+        const { cards, socketId } = data;
+        setUserCards(cards);
+      });
+
+      socket?.on("fieldCardsUpdate", (data) => {
+        setPlayedCards(data);
+      });
+    }
+  }, [socket]);
 
   return (
     <div className="game-grid">
@@ -35,10 +43,10 @@ const GameBoard = () => {
         />
       </div>
       <div className="played-cards">
-        <Deck myCards={myCards.slice(0, 4)} />
+        <Deck myCards={playedCards} socket={socket} />
       </div>
       <div className="playerdeck-bottom">
-        <Deck myCards={myCards} />
+        <Deck myCards={userCards} socket={socket} />
       </div>
       <div className="mockdeck-left">
         <MockDeck />
