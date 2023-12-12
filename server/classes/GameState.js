@@ -14,6 +14,7 @@ class GameState {
     this.gamePhase = null; // todo figure out phase of game
     this.judge = null; // this will be the players socketid
     this.judgeCard = null;
+    this.indexOfJudge = 0;
     this.field = [];
     this.winner = null;
   }
@@ -27,13 +28,17 @@ class GameState {
     return this.playerInfo.find((player) => player.socketId === socketId);
   }
 
-  startTurn() {
+  startTurn(socketIO) {
     // select a judge
     this.selectJudge();
     // have judge draw card
 
     this.drawJudgeCard();
-    // have players draw cards up to 5 max
+
+    socketIO.emit("judgeCard", {
+      judgeCard: this.judgeCard,
+      judge: this.judge,
+    });
   }
 
   drawJudgeCard() {
@@ -103,7 +108,53 @@ class GameState {
     this.judgeCard = null;
   }
 
-  endTurn() {}
+  endTurn(socketIO) {
+    //update player hands
+
+    //  discard cards
+    // move cards from field to discard pile
+    this.discard();
+    //this.checkIfWinner
+    if (this.checkIfWinner()) {
+      socketIO.emit("WINNER_FOUND", {
+        winnningPlayer: { ...this.winner },
+      });
+    }
+
+    // cleanup (update judge info, deal to players)
+    this.cleanupEndOfTurn(socketIO);
+  }
+
+  cleanupEndOfTurn(socketIO) {
+    // remove judge, card and update judge index
+    this.judge = null;
+    this.judgeCard = null;
+    this.indexOfJudge += 1;
+
+    // deal one card to each player
+    for (let index = 0; index < this.playerInfo.length; index++) {
+      const player = this.playerInfo[index];
+      if (player.isJudge) {
+        continue;
+      }
+
+      // draw card from deck
+      const card = this.playerDeck[this.playerDeck.length - 1];
+      this.removeCardFromDeck(this.playerDeck);
+
+      // add card to player hand
+      player.cardsInHand = player.cardsInHand.push(card);
+
+      // send updated cards to player
+      socketIO.to(player.socketId).emit(
+        ("playerCards",
+        {
+          cards: player.cardsInHand,
+          socketId: player.socketId,
+        })
+      );
+    }
+  }
 
   playCard() {}
 
@@ -112,7 +163,7 @@ class GameState {
   shuffleDeck(deck) {}
 
   checkIfWinner() {
-    const pointsToWin = 1;
+    const pointsToWin = 2;
 
     for (let index = 0; index < this.playerInfo.length; index++) {
       const player = this.playerInfo[index];

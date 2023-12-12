@@ -19,21 +19,31 @@ function App() {
     });
   };
 
+  const startNextTurn = () => {
+    resetForTurn();
+
+    socket.emit("startTurn");
+  };
+
   const [userCards, setUserCards] = useState([]);
   const [fieldCards, setFieldCards] = useState([]);
+
   const [judge, setJudge] = useState("");
   const [canJudgePick, setCanJudgePick] = useState(false);
   const [judgeCard, setJudgeCard] = useState({ type: null, content: null });
+  const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
+
   const [turn, setTurn] = useState(false);
   const [winner, setWinner] = useState({});
 
   const resetForTurn = () => {
-    setUserCards([]);
+    // setUserCards([]);
     setFieldCards([]);
     setJudge("");
     setJudgeCard({ type: null, content: null });
     setTurn(false);
     setCanJudgePick(false);
+    setCardHasBeenPicked(false);
   };
 
   useEffect(() => {
@@ -71,9 +81,9 @@ function App() {
 
   useEffect(() => {
     socket.on("judgePickedCardResponse", (data) => {
-      console.log(data);
+      setCardHasBeenPicked(true);
     });
-  }, [socket]);
+  }, [socket, cardHasBeenPicked]);
 
   useEffect(() => {
     socket.on("fieldCardsUpdate", (data) => {
@@ -95,7 +105,14 @@ function App() {
     <div>
       <p>Hello {socket.id}!</p>
 
-      <button onClick={startTurn}>START TURN</button>
+      {!turn && <button onClick={startTurn}>START TURN</button>}
+
+      {cardHasBeenPicked && (
+        <>
+          <br />
+          <button onClick={startNextTurn}>Start Next Turn</button>
+        </>
+      )}
 
       {turn && (
         <>

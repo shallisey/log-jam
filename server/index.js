@@ -29,13 +29,13 @@ socketIO.on("connection", (socket) => {
   socket.on("newPlayer", (data) => {});
 
   socket.on("startTurn", () => {
-    gameState.startTurn();
+    gameState.startTurn(socketIO);
 
     // send the judge card to everyone
-    socketIO.emit("judgeCard", {
-      judgeCard: gameState.judgeCard,
-      judge: gameState.judge,
-    });
+    // socketIO.emit("judgeCard", {
+    //   judgeCard: gameState.judgeCard,
+    //   judge: gameState.judge,
+    // });
 
     // loop through the players and send them their info
     gameState.playerInfo.forEach((player, idx) => {
@@ -145,28 +145,15 @@ socketIO.on("connection", (socket) => {
       return;
     }
 
-    //update player win count that was chosen
+    //update player points
     player.points += 1;
-
-    // loop through all players that are not the judge and deal them one card
-    // TODO: look at how cards are being dealt
-
-    // move cards from field to discard pile
-    gameState.discard();
 
     socket.emit("judgePickedCardResponse", {
       pickedCard: true,
       message: "Judge picked card was found",
     });
 
-    // Check if there is a winner
-    if (gameState.checkIfWinner()) {
-      socketIO.emit("WINNER_FOUND", {
-        winnningPlayer: { ...gameState.winner },
-      });
-    }
-
-    // TODO: send updated decks, hands, and discard piles
+    gameState.endTurn(socketIO);
   });
 
   socket.on("disconnect", () => {
