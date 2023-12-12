@@ -45,9 +45,9 @@
 .mockdeck-top {
   .fakeCard {
     transform: rotate(180deg);
-    height: 115px;
-    width: 170px;
-    background-size: 170px 230px;
+    height: 12vh;
+    width: 18vh;
+    background-size: 18vh 230px;
   }
   svg {
     margin-top: 30%;
@@ -58,10 +58,10 @@
 
 .mockdeck-right {
   .fakeCard {
-    /* transform: rotate(-90deg); */
-    height: 170px;
-    width: 115px;
-    background-size: 230px 170px;
+    height: 18vh;
+    width: 12vh;
+    background-size: 230px 18vh;
+
     // &:nth-child(1) {
     //   transform: translate(20px);
     //   transform: rotate(25deg);
@@ -80,26 +80,18 @@
     // }
   }
   svg {
-    width: 168px;
-    margin-top: 42%;
-    /* TODO come back to percentages */
     transform: rotate(-90deg);
-    /* ? todo why 30 */
-    /* width: 140%; */
   }
 }
 
 .mockdeck-left {
   .fakeCard {
     transform: rotate(180deg);
-    height: 170px;
-    width: 115px;
-    background-size: 230px 170px;
+    height: 18vh;
+    width: 12vh;
+    background-size: 230px 18vh;
   }
   svg {
-    width: 168px;
-    margin-top: 42%;
-    /* TODO come back to percentages */
     transform: rotate(-90deg);
   }
 }
