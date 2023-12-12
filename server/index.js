@@ -30,25 +30,6 @@ socketIO.on("connection", (socket) => {
     gameState.addPlayer(new Player(socket.id, "new name"));
   });
 
-  socket.on("startTurn", () => {
-    // gameState.startTurn();
-    // console.log("gamestate after judge selection", gameState);
-    // socketIO.emit("judgeCard", {
-    //   judgeCard: gameState.judgeCard,
-    //   judge: gameState.judge,
-    // });
-    // // loop through the players and send them their info
-    // gameState.playerInfo.forEach((player, idx) => {
-    //   if (player.cardsInHand.length !== 0) {
-    //     socketIO.to(player.socketId).emit("playerCards", {
-    //       cards: player.cardsInHand,
-    //       socketId: player.socketId,
-    //     });
-    //   }
-    // });
-    // socketIO.emit("startTurnResponse", `starting the game for ${socket.id}`);
-  });
-
   socket.on("playCard", (data) => {
     const { cardToPlay } = data;
 
@@ -62,8 +43,6 @@ socketIO.on("connection", (socket) => {
       });
       return;
     }
-
-    // TODO: add the card that was passed to the 'field'
 
     // remove card from users hand
     const indexOfCardInPlayersHand = player.findCardInHand(cardToPlay);

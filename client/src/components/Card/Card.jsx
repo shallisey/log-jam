@@ -31,7 +31,10 @@ const Card = ({
     } else if (!isPlayerJudge && !playedCardArea) {
       setIsFlipped(true);
     }
-  }, [canJudgePick, playedCardArea, isJudge]);
+    if (!playedCardArea && isPlayerJudge) {
+      setIsFlipped(false);
+    }
+  }, [canJudgePick, playedCardArea, isPlayerJudge]);
 
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>
