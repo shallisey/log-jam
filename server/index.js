@@ -27,16 +27,11 @@ socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
   gameState.addPlayer(new Player(socket.id, "new name"));
 
-  //console.log(gameState);
-
-  gameState.startTurn();
- 
-
-
   socket.on("startGame", (data) => {
     console.log("game has started");
     gameState.startGame();
     //console.log(gameState);
+    updatePlayers(gameState);
 
   });
 
@@ -45,11 +40,21 @@ socketIO.on("connection", (socket) => {
   });
 });
 
-app.get("/api", (req, res) => {
-  res.json({
-    message: "Hello world",
-  });
-});
+const updatePlayers = (myGameState) => {
+
+  let playerList = myGameState.getPlayers();
+
+
+  playerList.forEach((player) => {
+    let secretGameState = {
+      ...myGameState,
+      playerInfo: myGameState.matchPlayerToSocketId(player.socketId)
+    }
+    socketIO.to(player.socketId).emit("updateGameState", { gameState: secretGameState });
+  })
+
+
+}
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
