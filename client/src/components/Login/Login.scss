@@ -1,0 +1,44 @@
+.login-container {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+  display: block;
+  color: white;
+  font-weight: bolder;
+}
+
+.login {
+  padding: 20px;
+  background-color: #7c0202;
+  width: 25vw;
+  height: 25vh;
+  margin: auto;
+  margin-top: 25vh;
+  border-radius: 20px;
+  button {
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    color: #7c0202;
+    background-color: white;
+    font-weight: bolder;
+    border-color: transparent;
+    margin: 5px;
+  }
+  .join-game-btn {
+    display: block;
+  }
+  input {
+    font-size: 1em;
+    display: block;
+  }
+}

@@ -1,0 +1,14 @@
+.fakeCard {
+  display: inline-block;
+  margin: 10px;
+  background-image: radial-gradient(circle, white, #1e3050, black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: end;
+}
+
+/* .fakeCard svg {
+  /* margin: auto; 
+  width: 100%;
+  transform: rotate(90deg);
+} */
