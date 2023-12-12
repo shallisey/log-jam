@@ -1,4 +1,5 @@
 const deck = [
+
     {
         type: "Dependencies",
         content: "The snowman will come to life and request a top hat and a carrot nose upgrade."
@@ -352,6 +353,6 @@ const deck = [
 { "type": "Risks", "content": "Checking the ski resort's availability might result in a reservation for a ski slope on Mars." }, 
 { "type": "Risks", "content": "Attempting to measure snow depth using the app might provide inaccurate results, leading to claims that the snow depth is taller than Mount Everest." }, 
 { "type": "Risks", "content": "Enabling the 'Winterize Music' feature might replace all songs with an endless loop of Christmas jingles, leading to a never-ending holiday season." }
-];
+    ];
 
 module.exports = deck;
