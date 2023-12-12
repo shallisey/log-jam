@@ -1,7 +1,7 @@
 import React from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
-import "./GameBoard.css";
+import "./GameBoard.scss";
 
 const myCards = [
   { title: "title 1", content: "content 1" },

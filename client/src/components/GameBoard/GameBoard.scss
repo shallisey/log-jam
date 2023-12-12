@@ -1,0 +1,105 @@
+.game-grid {
+  display: grid;
+  grid-template-columns: min-content max-content min-content 1fr;
+  grid-template-rows: min-content min-content min-content min-content;
+  /* grid-template-areas:
+    ".                mockdeck-top      ."
+    "mockdeck-left       .              mockdeck-right"
+    "mockdeck-left   played-cards       mockdeck-right"
+    ".               playerdeck-bottom  ."; */
+
+  grid-template-areas:
+    "mockdeck-left   mockdeck-top       mockdeck-right game-info"
+    "mockdeck-left       .              mockdeck-right game-info"
+    "mockdeck-left   played-cards       mockdeck-right game-info"
+    "mockdeck-left   playerdeck-bottom  mockdeck-right game-info";
+}
+
+.mockdeck-top {
+  grid-area: mockdeck-top;
+}
+
+.mockdeck-right {
+  grid-area: mockdeck-right;
+}
+
+.played-cards {
+  grid-area: played-cards;
+  justify-self: center;
+}
+
+.playerdeck-bottom {
+  grid-area: playerdeck-bottom;
+}
+
+.mockdeck-left {
+  grid-area: mockdeck-left;
+}
+
+.game-info {
+  grid-area: game-info;
+  background-color: aqua;
+  margin: 10px;
+}
+
+.mockdeck-top {
+  .fakeCard {
+    transform: rotate(180deg);
+    height: 115px;
+    width: 170px;
+    background-size: 170px 230px;
+  }
+  svg {
+    margin-top: 30%;
+    /* ? todo why 30 */
+    width: 100%;
+  }
+}
+
+.mockdeck-right {
+  .fakeCard {
+    /* transform: rotate(-90deg); */
+    height: 170px;
+    width: 115px;
+    background-size: 230px 170px;
+    // &:nth-child(1) {
+    //   transform: translate(20px);
+    //   transform: rotate(25deg);
+    // }
+    // &:nth-child(2) {
+    //   transform: rotate(50deg);
+    // }
+    // &:nth-child(3) {
+    //   transform: rotate(0deg);
+    // }
+    // &:nth-child(4) {
+    //   transform: rotate(-25deg);
+    // }
+    // &:nth-child(5) {
+    //   transform: rotate(-50deg);
+    // }
+  }
+  svg {
+    width: 168px;
+    margin-top: 42%;
+    /* TODO come back to percentages */
+    transform: rotate(-90deg);
+    /* ? todo why 30 */
+    /* width: 140%; */
+  }
+}
+
+.mockdeck-left {
+  .fakeCard {
+    transform: rotate(180deg);
+    height: 170px;
+    width: 115px;
+    background-size: 230px 170px;
+  }
+  svg {
+    width: 168px;
+    margin-top: 42%;
+    /* TODO come back to percentages */
+    transform: rotate(-90deg);
+  }
+}
