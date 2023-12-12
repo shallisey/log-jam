@@ -3,13 +3,12 @@ import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
 import Login from "./components/Login/Login";
 
-socket.on("updateGameState", (args) => {
-  console.log(args);
-})
-
 function App() {
   const [name, setName] = useState();
   const [socket, setSocket] = useState(null);
+  const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
+  const [turn, setTurn] = useState(false);
+  const [winner, setWinner] = useState({});
 
   useEffect(() => {
     if (socket === null) {
@@ -18,23 +17,13 @@ function App() {
       socket?.on("WINNER_FOUND", (data) => {
         console.log("data", data);
       });
-
-      socket?.on("judgeCanPick", (data) => {
-        setCanJudgePick(data);
+      
+      socket?.on("judgePickedCardResponse", (data) => {
+        setCardHasBeenPicked(true);
       });
 
       socket?.on("startTurnResponse", (data) => {
         setTurn(true);
-      });
-
-      socket?.on("judgeCard", (data) => {
-        const { judge, judgeCard } = data;
-        setJudge(judge);
-        setJudgeCard(judgeCard);
-      });
-
-      socket?.on("judgePickedCardResponse", (data) => {
-        setCardHasBeenPicked(true);
       });
 
       socket?.on("playCardResponse", (data) => {
@@ -58,25 +47,10 @@ function App() {
     socket.emit("startTurn");
   };
 
-  const judgePickedCard = (card) => {
-    socket.emit("judgePickedCard", {
-      judgePickedCard: card,
-    });
-  };
-
   const startNextTurn = () => {
     socket.emit("startTurn");
   };
-
-  const [judge, setJudge] = useState("");
-  const [canJudgePick, setCanJudgePick] = useState(false);
-  const [judgeCard, setJudgeCard] = useState({ type: null, content: null });
-  const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
-
-  const [turn, setTurn] = useState(false);
-  const [winner, setWinner] = useState({});
-
-  const isPlayerJudge = socket?.id === judge;
+  
 
   return (
     <div>
@@ -103,14 +77,9 @@ function App() {
       {turn && (
         <>
           <div>
-            <h2>JUDGE: {judge}</h2>
+            <h2>JUDGE:</h2>
           </div>
 
-          <div>
-            JUDGE CARD
-            {/* <h2>type: {judgeCard.type}</h2> */}
-            <p>content: {judgeCard.content}</p>
-          </div>
 
           <br />
           <div>

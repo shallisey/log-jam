@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Card.scss";
 
-const Card = ({ title, content, deckType, isJudge, socket }) => {
+const Card = ({ card, isJudge, socket, isPlayerJudge, playedCardArea, canJudgePick }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const playCard = (card) => {
@@ -10,11 +10,25 @@ const Card = ({ title, content, deckType, isJudge, socket }) => {
     });
   };
 
+  const judgePickedCard = (card) => {
+    console.log(card);
+    socket.emit("judgePickedCard", {
+      judgePickedCard: card,
+    });
+  }
+
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>
       <div
         class={isFlipped ? "card" : "card is-flipped"}
-        onClick={() => playCard({ type: title, content: content })}
+        onClick={() => {
+          if(playedCardArea && isPlayerJudge && canJudgePick) {
+            judgePickedCard(card)
+          }
+          else{
+          !isPlayerJudge && playCard(card)
+          }
+        }}
         //setIsFlipped(!isFlipped)}
       >
         <div class="card__face card__face--front">
@@ -33,8 +47,8 @@ const Card = ({ title, content, deckType, isJudge, socket }) => {
           </svg>
         </div>
         <div class="card__face card__face--back">
-          <h3>{title}</h3>
-          <p>{content}</p>
+          <h3>{card.type}</h3>
+          <p>{card.content}</p>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ class Player {
   }
 
   removeCardAtIndex(indexOfCard) {
-    this.cardsInHand = this.cardsInHand.splice(indexOfCard, 1);
+    this.cardsInHand.splice(indexOfCard, 1);
   }
 
   setHost (host) {
