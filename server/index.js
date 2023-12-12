@@ -25,31 +25,28 @@ socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
   gameState.addPlayer(new Player(socket.id, "new name"));
   gameState.playerInfo[0].setHost(true);
- 
 
   socket.on("newPlayer", (data) => {
     gameState.addPlayer(new Player(socket.id, "new name"));
   });
 
   socket.on("startTurn", () => {
-    gameState.startTurn();
-
-    socketIO.emit("judgeCard", {
-      judgeCard: gameState.judgeCard,
-      judge: gameState.judge,
-    });
-
-    // loop through the players and send them their info
-    gameState.playerInfo.forEach((player, idx) => {
-      if (player.cardsInHand.length !== 0) {
-        socketIO.to(player.socketId).emit("playerCards", {
-          cards: player.cardsInHand,
-          socketId: player.socketId,
-        });
-      }
-    });
-
-    socketIO.emit("startTurnResponse", `starting the game for ${socket.id}`);
+    // gameState.startTurn();
+    // console.log("gamestate after judge selection", gameState);
+    // socketIO.emit("judgeCard", {
+    //   judgeCard: gameState.judgeCard,
+    //   judge: gameState.judge,
+    // });
+    // // loop through the players and send them their info
+    // gameState.playerInfo.forEach((player, idx) => {
+    //   if (player.cardsInHand.length !== 0) {
+    //     socketIO.to(player.socketId).emit("playerCards", {
+    //       cards: player.cardsInHand,
+    //       socketId: player.socketId,
+    //     });
+    //   }
+    // });
+    // socketIO.emit("startTurnResponse", `starting the game for ${socket.id}`);
   });
 
   socket.on("playCard", (data) => {
@@ -152,48 +149,58 @@ socketIO.on("connection", (socket) => {
       message: "Judge picked card was found",
     });
 
-    // THIS IS WHERE THE END TURN LOGIC STARTS
-
-    // gameState.endTurn(socketIO);
-    gameState.discard();
-    //gameState.checkIfWinner
     if (gameState.checkIfWinner()) {
       socketIO.emit("WINNER_FOUND", {
         winnningPlayer: { ...gameState.winner },
       });
+      return;
     }
+    setTimeout(() => {
+      // THIS IS WHERE THE END TURN LOGIC STARTS
 
-    // remove judge, card and update judge index
-    const judge = gameState.matchPlayerToSocketId(gameState.judge);
-    judge.isJudge = false;
-    gameState.judge = null;
-    gameState.judgeCard = null;
-    gameState.indexOfJudge += 1;
+      // gameState.endTurn(socketIO);
+      gameState.discard();
+      //gameState.checkIfWinner
 
-    // deal one card to each player
-    for (let index = 0; index < gameState.playerInfo.length; index++) {
-      const player = gameState.playerInfo[index];
-      if (player.isJudge) {
-        continue;
+      // remove judge, card and update judge index
+      const judge = gameState.matchPlayerToSocketId(gameState.judge);
+      judge.isJudge = false;
+      gameState.judge = null;
+      gameState.judgeCard = null;
+      gameState.indexOfJudge += 1;
+      if (gameState.indexOfJudge > gameState.playerInfo.length - 1) {
+        gameState.indexOfJudge = 0;
       }
 
-      // add card to player hand
-      if (player.cardsInHand.length < 5) {
-        // draw card from deck
-        const card = gameState.playerDeck[gameState.playerDeck.length - 1];
-        gameState.removeCardFromDeck(gameState.playerDeck);
-        player.cardsInHand.push(card);
-      }
+      console.log("gameState after judge update", gameState);
 
-      // send updated cards to player
-      socketIO.to(player.socketId).emit("playerCards", {
-        cards: player.cardsInHand,
-        socketId: player.socketId,
-      });
-    }
+      // deal one card to each player
+      for (let index = 0; index < gameState.playerInfo.length; index++) {
+        const player = gameState.playerInfo[index];
+        player.hasPlayedCardThisTurn = false;
+        if (player.isJudge) {
+          continue;
+        }
+
+        // add card to player hand
+        if (player.cardsInHand.length < 5) {
+          // draw card from deck
+          const card = gameState.playerDeck[gameState.playerDeck.length - 1];
+          gameState.removeCardFromDeck(gameState.playerDeck);
+          player.cardsInHand.push(card);
+        }
+
+        // send updated cards to player
+        // socketIO.to(player.socketId).emit("playerCards", {
+        //   cards: player.cardsInHand,
+        //   socketId: player.socketId,
+        // });
+      }
+      socketIO.emit("fieldCardsUpdate", gameState.field);
+      startTheTurn();
+    }, 2000);
 
     // sending updated field
-    socketIO.emit("fieldCardsUpdate", gameState.field);
   });
 
   socket.on("endTurn", () => {});
@@ -202,7 +209,11 @@ socketIO.on("connection", (socket) => {
     console.log("game has started");
     gameState.startGame();
     console.log(gameState);
-    updatePlayers(gameState);
+
+    socketIO.emit("gameStarted");
+    setTimeout(() => {
+      startTheTurn();
+    }, 5000);
   });
 
   socket.on("endGame", (data) => {
@@ -215,20 +226,6 @@ socketIO.on("connection", (socket) => {
   });
 });
 
-const updatePlayers = (myGameState) => {
-  let playerList = myGameState.getPlayers();
-
-  playerList.forEach((player) => {
-    let secretGameState = {
-      ...myGameState,
-      playerInfo: myGameState.matchPlayerToSocketId(player.socketId),
-    };
-    socketIO
-      .to(player.socketId)
-      .emit("updateGameState", { gameState: secretGameState });
-  });
-};
-
 const getAllConnectedSocketIds = () => {
   const connectedSocketMap = socketIO.sockets.adapter.sids;
   const connectedPlayers = [];
@@ -238,21 +235,42 @@ const getAllConnectedSocketIds = () => {
   });
 
   return connectedPlayers;
-}
+};
 
 const endGame = async (myGameState) => {
   delete myGameState;
   const players = getAllConnectedSocketIds();
   const newGameState = new GameState(deck, judgeDeck);
-  players.forEach((player)=> {
+  players.forEach((player) => {
     newGameState.addPlayer(new Player(player, "new name"));
-  })
+  });
 
   gameState = newGameState;
 
-  console.log(gameState)
-}
+  console.log(gameState);
+};
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+const startTheTurn = () => {
+  gameState.startTurn();
+
+  console.log("gamestate after judge selection", gameState);
+
+  socketIO.emit("judgeCard", {
+    judgeCard: gameState.judgeCard,
+    judge: gameState.judge,
+  });
+
+  // loop through the players and send them their info
+  gameState.playerInfo.forEach((player, idx) => {
+    if (player.cardsInHand.length !== 0) {
+      socketIO.to(player.socketId).emit("playerCards", {
+        cards: player.cardsInHand,
+        socketId: player.socketId,
+      });
+    }
+  });
+};
