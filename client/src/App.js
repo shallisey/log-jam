@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 const socket = socketIO.connect("http://localhost:4000");
 
+socket.on("updateGameState", (args) => {
+  console.log(args);
+})
+
 function App() {
   const startGame = () => {
-    console.log("TEST");
+    console.log("start");
     socket.emit("startGame");
   };
+  const endGame = () => {
+    console.log("end");
+    socket.emit("endGame");
+  }
 
   const startTurn = () => {
     socket.emit("startTurn");
@@ -111,7 +119,10 @@ function App() {
       <p>Hello {socket.id}!</p>
 
       <button onClick={() => startGame()} type="button">
-        Click Me!
+        Start!
+      </button>
+      <button onClick={() => endGame()} type="button">
+        End!
       </button>
 
       {!turn && <button onClick={startTurn}>START TURN</button>}
