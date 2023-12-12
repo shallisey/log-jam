@@ -16,13 +16,11 @@
   transition: transform 1s;
   width: 18vh;
   height: 24vh;
-}
-
-.card svg {
-  /* margin-top: 50%; */
-  /* text-align: center;
-  display: block;
-  margin: auto; */
+  font-size: 0.75em;
+  line-height: 1em;
+  p {
+    margin: 0 5px;
+  }
 }
 
 .card.is-flipped {
@@ -60,6 +58,7 @@
   }
   .card__face--back {
     color: #7c0202;
+    overflow: scroll;
   }
 }
 
@@ -67,4 +66,5 @@
   background: whitesmoke;
   transform: rotateY(180deg);
   color: #1e3050;
+  overflow: scroll;
 }

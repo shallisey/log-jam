@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
-import GameInfo from "../GameInfo/GameInfo";
 import Card from "../Card/Card";
 import "./GameBoard.scss";
 
@@ -14,7 +13,6 @@ const GameBoard = ({ socket }) => {
   const [playedCards, setPlayedCards] = useState([]);
   const [judge, setJudge] = useState("");
   const [canJudgePick, setCanJudgePick] = useState(false);
-
 
   const isPlayerJudge = socket?.id === judge;
 
@@ -42,8 +40,6 @@ const GameBoard = ({ socket }) => {
       });
     }
   }, [socket]);
-  
-
 
   return (
     <div className="game-grid">
@@ -54,21 +50,28 @@ const GameBoard = ({ socket }) => {
         <MockDeck />
       </div>
       <div className="judge-card">
-        <Card
-          card={judgeCard}
-          isJudge={true}
-        />
+        <Card card={judgeCard} isJudge={true} />
       </div>
       <div className="played-cards">
-        <Deck myCards={playedCards} socket={socket} playedCardArea={true} isPlayerJudge={isPlayerJudge} canJudgePick={canJudgePick} />
+        <Deck
+          myCards={playedCards}
+          socket={socket}
+          playedCardArea={true}
+          isPlayerJudge={isPlayerJudge}
+          canJudgePick={canJudgePick}
+        />
       </div>
       <div className="playerdeck-bottom">
-        <Deck myCards={userCards} socket={socket} isPlayerJudge={isPlayerJudge} />
+        <Deck
+          myCards={userCards}
+          socket={socket}
+          isPlayerJudge={isPlayerJudge}
+        />
       </div>
       <div className="mockdeck-left">
         <MockDeck />
       </div>
-      <GameInfo />
+      {/* <GameInfo /> */}
     </div>
   );
 };
