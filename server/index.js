@@ -12,7 +12,7 @@ const deck = require("./Decks/deck");
 
 app.use(cors());
 
-const gameState = new GameState(deck, judgeDeck);
+let gameState = new GameState(deck, judgeDeck);
 //console.log("gameState", gameState);
 
 const socketIO = require("socket.io")(http, {
@@ -24,6 +24,8 @@ const socketIO = require("socket.io")(http, {
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
   gameState.addPlayer(new Player(socket.id, "new name"));
+  gameState.playerInfo[0].setHost(true);
+ 
 
   socket.on("newPlayer", (data) => {});
 
@@ -148,8 +150,13 @@ socketIO.on("connection", (socket) => {
   socket.on("startGame", (data) => {
     console.log("game has started");
     gameState.startGame();
-    //console.log(gameState);
+    console.log(gameState);
     updatePlayers(gameState);
+  });
+
+  socket.on("endGame", (data) => {
+    console.log("game has ended");
+    endGame(gameState);
   });
 
   socket.on("disconnect", () => {
@@ -170,6 +177,30 @@ const updatePlayers = (myGameState) => {
       .emit("updateGameState", { gameState: secretGameState });
   });
 };
+
+const getAllConnectedSocketIds = () => {
+  const connectedSocketMap = socketIO.sockets.adapter.sids;
+  const connectedPlayers = [];
+
+  connectedSocketMap.forEach((value, key, map) => {
+    connectedPlayers.push(key);
+  });
+
+  return connectedPlayers;
+}
+
+const endGame = async (myGameState) => {
+  delete myGameState;
+  const players = getAllConnectedSocketIds();
+  const newGameState = new GameState(deck, judgeDeck);
+  players.forEach((player)=> {
+    newGameState.addPlayer(new Player(player, "new name"));
+  })
+
+  gameState = newGameState;
+
+  console.log(gameState)
+}
 
 http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
