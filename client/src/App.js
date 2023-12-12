@@ -34,9 +34,11 @@ function App() {
   }, [socket]);
 
   const startGame = () => {
+    console.log("start");
     socket.emit("startGame");
   };
   const endGame = () => {
+    console.log("end");
     socket.emit("endGame");
   };
 
@@ -50,10 +52,13 @@ function App() {
 
   return (
     <div>
+      {/* {!name && <Login setName={setName} />} */}
       <GameBoard socket={socket} />
       <p>Hello {socket?.id}!</p>
 
-      {/* <Modal clickEvent={startGame} /> */}
+      <button onClick={() => startGame()} type="button">
+        Start!
+      </button>
       <button onClick={() => endGame()} type="button">
         End!
       </button>
