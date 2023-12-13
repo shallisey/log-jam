@@ -10,7 +10,7 @@ class GameState {
       START: "start",
       READYFORTURN: "readyforturn",
       TURN: "turn",
-      GAMEOVER: "gameover"
+      GAMEOVER: "gameover",
     });
     this.playerDeck = deck;
     this.playerDiscardPile = [];
@@ -60,9 +60,8 @@ class GameState {
     // remove judgeBoolean from player
 
     const numberOfPlayers = this.playerInfo.length;
-    const randomUser = getRandomInt(numberOfPlayers);
 
-    const newJudge = this.playerInfo[randomUser];
+    const newJudge = this.playerInfo[this.indexOfJudge];
 
     // CHANGING PLAYER STATE
     // TODO: potentially move this out

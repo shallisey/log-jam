@@ -5,6 +5,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: end;
+  opacity: 1;
+}
+
+.fakeCard.disapear {
+  opacity: 0;
+  /* can comment out to remove card disapearing */
 }
 
 /* .fakeCard svg {

@@ -8,6 +8,8 @@ const Card = ({
   isPlayerJudge,
   playedCardArea,
   canJudgePick,
+  deckSize,
+  winningCard,
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -28,10 +30,20 @@ const Card = ({
     console.log("canJudgePick", canJudgePick);
     if ((isPlayerJudge && playedCardArea) || canJudgePick) {
       setIsFlipped(true);
-    } else if (!isPlayerJudge && !playedCardArea) {
+    }
+    if (!isPlayerJudge && !playedCardArea) {
       setIsFlipped(true);
     }
-  }, [canJudgePick, playedCardArea, isJudge]);
+
+    if (!playedCardArea && isPlayerJudge) {
+      setIsFlipped(false);
+    }
+    if (playedCardArea && !isPlayerJudge && deckSize !== 3) {
+      setIsFlipped(false);
+    }
+  }, [canJudgePick, playedCardArea, isPlayerJudge, deckSize]);
+
+  console.log("card: %O\nwinningCard: %O\n", card, winningCard);
 
   return (
     <div class={isJudge ? "judge scene scene--card" : "scene scene--card"}>
@@ -61,7 +73,15 @@ const Card = ({
             />
           </svg>
         </div>
-        <div class="card__face card__face--back">
+        <div
+          class={
+            playedCardArea &&
+            winningCard?.playerSocketId &&
+            winningCard?.playerSocketId !== card?.playerSocketId
+              ? "card__face card__face--back losing-cards"
+              : "card__face card__face--back"
+          }
+        >
           <h3>{card.type}</h3>
           <p>{card.content}</p>
         </div>

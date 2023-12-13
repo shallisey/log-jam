@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./MockDeck.css";
 
-const MockDeck = ({ text }) => {
+const MockDeck = ({ isShort }) => {
   return (
     <div className="mockDeckContainer">
-      {Array.from({ length: 5 }, () => (
+      {Array.from({ length: 5 }, (_, i) => (
         // <div className="fake-card-overlay">
-        <div className="fakeCard">
+        <div className={isShort && i === 4 ? "fakeCard disapear" : "fakeCard"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="64"

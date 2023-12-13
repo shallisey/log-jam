@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from "react";
 import socketIO from "socket.io-client";
 import GameBoard from "./components/GameBoard/GameBoard";
-import Modal from "./components/Modal/Modal";
+import "./App.scss";
 
 function App() {
   const [socket, setSocket] = useState(null);
   const [cardHasBeenPicked, setCardHasBeenPicked] = useState(false);
   const [turn, setTurn] = useState(false);
+  const [gameHasStarted, setGameHasStarted] = useState(false);
   const [winner, setWinner] = useState({});
+  const [winningCard, setWinningCard] = useState({});
+  const [players, setPlayers] = useState([]);
 
   useEffect(() => {
     if (socket === null) {
       setSocket(socketIO.connect("http://localhost:4000"));
     } else {
       socket?.on("WINNER_FOUND", (data) => {
-        console.log("data", data);
+        console.log("winner found", data);
+        setWinner(data);
       });
 
       socket?.on("judgePickedCardResponse", (data) => {
         setCardHasBeenPicked(true);
+        setWinningCard(data?.card);
+        setPlayers(data.players);
       });
 
       socket?.on("startTurnResponse", (data) => {
         setTurn(true);
+      });
+
+      socket?.on("gameStarted", (data) => {
+        setGameHasStarted(true);
+        console.log("players", data);
+        setPlayers(data);
       });
 
       socket?.on("playCardResponse", (data) => {
@@ -34,9 +46,9 @@ function App() {
   }, [socket]);
 
   const startGame = () => {
-    console.log("start");
-    socket.emit("startGame");
+    socket?.emit("startGame");
   };
+
   const endGame = () => {
     console.log("end");
     socket.emit("endGame");
@@ -52,83 +64,42 @@ function App() {
 
   return (
     <div>
-      {/* {!name && <Login setName={setName} />} */}
-      <GameBoard socket={socket} />
-      <p>Hello {socket?.id}!</p>
-
-      <button onClick={() => startGame()} type="button">
-        Start!
-      </button>
-      <button onClick={() => endGame()} type="button">
-        End!
-      </button>
-
-      {!turn && <button onClick={startTurn}>START TURN</button>}
-
-      {cardHasBeenPicked && (
-        <>
-          <br />
-          <button onClick={startNextTurn}>Start Next Turn</button>
-        </>
-      )}
-
-      {turn && (
-        <>
-          <div>
-            <h2>JUDGE:</h2>
+      <div>
+        {winner && (
+          <>
+            <h1>{winner.username}</h1>
+            <h1>{winner.socketId}</h1>
+          </>
+        )}
+      </div>
+      <div>
+        {!gameHasStarted && (
+          <div className="modal-container">
+            <div className="modal">
+              <button onClick={() => startGame()}>Start Game!</button>
+            </div>
           </div>
-
-          <br />
-          <div>
-            {/* {fieldCards.length > 0 && (
-              <div>
-                <h1>FIELD CARDS</h1>
-                <div>
-                  {fieldCards.map((card, i) => (
-                    <>
-                      <div key={i}>
-                        <h3>username: {card.username}</h3>
-                        <h3>socketID of player: {card.playerSocketId}</h3>
-                        <div>
-                          <p>type: {card.type}</p>
-                          <p>content: {card.content}</p>
-                          {isPlayerJudge && canJudgePick && (
-                            <button onClick={() => judgePickedCard(card)}>
-                              Pick this card judge
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  ))}
-                </div>
-              </div>
-            )} */}
+        )}
+        {winner?.winnningPlayer && (
+          <div className="modal-container">
+            <div className="modal">
+              {socket.id === winner?.winnningPlayer?.socketId ? (
+                <h3>You Won!</h3>
+              ) : (
+                <h3>Player {winner?.winnningPlayer?.socketId} Won!</h3>
+              )}
+            </div>
           </div>
-          <br />
-
-          {/* {userCards.length > 0 && (
-            <>
-              <h1>YOUR CARDS</h1>
-              {userCards.map((card, i) => (
-                <>
-                  <br />
-                  <div key={i}>
-                    <h3>Type: {card.type}</h3>
-                    <p> content: {card.content}</p>
-                  </div>
-                  {!isPlayerJudge && (
-                    <button onClick={() => playCard(card)}>
-                      play this card
-                    </button>
-                  )}
-                  <br />
-                </>
-              ))}
-            </>
-          )} */}
-        </>
-      )}
+        )}
+      </div>
+      <div>
+        <GameBoard
+          socket={socket}
+          players={players}
+          winningCard={winningCard}
+          setWinningCard={setWinningCard}
+        />
+      </div>
     </div>
   );
 }
