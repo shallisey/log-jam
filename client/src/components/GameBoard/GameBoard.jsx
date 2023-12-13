@@ -14,6 +14,7 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
   const [playedCards, setPlayedCards] = useState([]);
   const [judge, setJudge] = useState("");
   const [canJudgePick, setCanJudgePick] = useState(false);
+  const [position, setPosition] = useState(0);
 
   const isPlayerJudge = socket?.id === judge;
 
@@ -37,6 +38,7 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
         const { judge, judgeCard } = data;
         setJudge(judge);
         setJudgeCard(judgeCard);
+        // setPosition(position + 2);
       });
 
       socket?.on("judgeCanPick", (data) => {
@@ -55,10 +57,10 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
   return (
     <div className="game-grid">
       <div className="mockdeck-top">
-        <MockDeck />
+        <MockDeck isShort={getIsShort(position)} />
       </div>
       <div className="mockdeck-right">
-        <MockDeck />
+        <MockDeck isShort={getIsShort(position + 1)} />
       </div>
       <div className="judge-card">
         {judgeCard?.content && <Card card={judgeCard} isJudge={true} />}
@@ -81,7 +83,7 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
         />
       </div>
       <div className="mockdeck-left">
-        <MockDeck />
+        <MockDeck isShort={getIsShort(position + 2)} />
       </div>
       <GameInfo playerInfo={players} />
     </div>
