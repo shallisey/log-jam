@@ -85,7 +85,7 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
       <div className="mockdeck-left">
         <MockDeck isShort={getIsShort(position + 2)} />
       </div>
-      <GameInfo playerInfo={players} />
+      <GameInfo socket={socket} playerInfo={players} />
     </div>
   );
 };

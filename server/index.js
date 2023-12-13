@@ -23,11 +23,17 @@ const socketIO = require("socket.io")(http, {
 
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
-  gameState.addPlayer(new Player(socket.id, "new name"));
-  gameState.playerInfo[0].setHost(true);
+  // gameState.addPlayer(new Player(socket.id, "new name"));
+  // gameState.playerInfo[0].setHost(true);
 
   socket.on("newPlayer", (data) => {
-    gameState.addPlayer(new Player(socket.id, "new name"));
+    console.log("newplayer", data);
+    console.log("gameState", gameState.playerInfo);
+    gameState.addPlayer(new Player(socket.id, data));
+    if (gameState.playerInfo.length === 4) {
+      console.log("here");
+      startGame();
+    }
   });
 
   socket.on("playCard", (data) => {
@@ -128,7 +134,7 @@ socketIO.on("connection", (socket) => {
       card: judgePickedCard,
       message: "Judge picked card was found",
       players: gameState.playerInfo.map((player) => ({
-        socketId: player.socketId,
+        socketId: player.username,
         points: player.points,
       })),
     });
@@ -189,13 +195,14 @@ socketIO.on("connection", (socket) => {
 
   socket.on("endTurn", () => {});
 
-  socket.on("startGame", (data) => {
+  const startGame = () => {
+    // socket.on("startGame", (data) => {
     console.log("game has started");
     gameState.startGame();
     console.log(gameState);
 
     const playerInfo = gameState.playerInfo.map((player) => ({
-      socketId: player.socketId,
+      socketId: player.username,
       points: player.points,
     }));
 
@@ -204,7 +211,8 @@ socketIO.on("connection", (socket) => {
     setTimeout(() => {
       startTheTurn();
     }, 2000);
-  });
+    // });
+  };
 
   socket.on("endGame", (data) => {
     console.log("game has ended");
