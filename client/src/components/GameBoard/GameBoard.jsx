@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Deck from "../deck/Deck";
 import MockDeck from "../MockDeck/MockDeck";
 import Card from "../Card/Card";
+import GameInfo from "../GameInfo/GameInfo";
 import "./GameBoard.scss";
 
-const GameBoard = ({ socket }) => {
+const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
   const [judgeCard, setJudgeCard] = useState({
     title: "Judge Card",
     content: "content Judge",
@@ -26,7 +27,10 @@ const GameBoard = ({ socket }) => {
 
       socket?.on("fieldCardsUpdate", (data) => {
         setPlayedCards(data);
-        console.log(data);
+        console.log("fieldCard", data);
+        if (!data.length) {
+          setWinningCard({});
+        }
       });
 
       socket?.on("judgeCard", (data) => {
@@ -59,6 +63,7 @@ const GameBoard = ({ socket }) => {
           playedCardArea={true}
           isPlayerJudge={isPlayerJudge}
           canJudgePick={canJudgePick}
+          winningCard={winningCard}
         />
       </div>
       <div className="playerdeck-bottom">
@@ -71,7 +76,7 @@ const GameBoard = ({ socket }) => {
       <div className="mockdeck-left">
         <MockDeck />
       </div>
-      {/* <GameInfo /> */}
+      <GameInfo playerInfo={players} />
     </div>
   );
 };

@@ -123,9 +123,14 @@ socketIO.on("connection", (socket) => {
     //update player points
     player.points += 1;
 
-    socket.emit("judgePickedCardResponse", {
+    socketIO.emit("judgePickedCardResponse", {
       pickedCard: true,
+      card: judgePickedCard,
       message: "Judge picked card was found",
+      players: gameState.playerInfo.map((player) => ({
+        socketId: player.socketId,
+        points: player.points,
+      })),
     });
 
     if (gameState.checkIfWinner()) {
@@ -189,7 +194,13 @@ socketIO.on("connection", (socket) => {
     gameState.startGame();
     console.log(gameState);
 
-    socketIO.emit("gameStarted");
+    const playerInfo = gameState.playerInfo.map((player) => ({
+      socketId: player.socketId,
+      points: player.points,
+    }));
+
+    socketIO.emit("gameStarted", playerInfo);
+
     setTimeout(() => {
       startTheTurn();
     }, 2000);

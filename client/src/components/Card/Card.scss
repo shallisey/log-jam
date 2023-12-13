@@ -67,4 +67,32 @@
   transform: rotateY(180deg);
   color: #1e3050;
   overflow: scroll;
+  // animation: grow 1s;
+  // transform: scale(1);
+}
+
+.winning-card {
+  // animation: grow 2s forwards;
+  // animation-delay: 0.3s;
+  // -webkit-backface-visibility: hidden;
+  // -webkit-transform-style: preserve-3d;
+  color: #7c0202;
+}
+
+.losing-cards {
+  animation: grow 2s forwards;
+  // opacity: 0;
+}
+
+@keyframes grow {
+  from {
+    // visibility: visible;
+    opacity: 1;
+    // transform: scale(0);
+  }
+  to {
+    // visibility: visible;
+    opacity: 0;
+    // transform: scale(3);
+  }
 }
