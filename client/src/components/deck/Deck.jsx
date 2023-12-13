@@ -7,6 +7,7 @@ const Deck = ({
   isPlayerJudge,
   playedCardArea,
   canJudgePick,
+  winningCard,
 }) => {
   return (
     <div>
@@ -20,6 +21,7 @@ const Deck = ({
           canJudgePick={
             canJudgePick || (myCards.length === 3 && playedCardArea)
           }
+          winningCard={winningCard}
         />
       ))}
     </div>

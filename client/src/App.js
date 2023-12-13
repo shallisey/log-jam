@@ -9,6 +9,8 @@ function App() {
   const [turn, setTurn] = useState(false);
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [winner, setWinner] = useState({});
+  const [winningCard, setWinningCard] = useState({});
+  const [players, setPlayers] = useState([]);
 
   useEffect(() => {
     if (socket === null) {
@@ -21,14 +23,18 @@ function App() {
 
       socket?.on("judgePickedCardResponse", (data) => {
         setCardHasBeenPicked(true);
+        setWinningCard(data?.card);
+        setPlayers(data.players);
       });
 
       socket?.on("startTurnResponse", (data) => {
         setTurn(true);
       });
 
-      socket?.on("gameStarted", () => {
+      socket?.on("gameStarted", (data) => {
         setGameHasStarted(true);
+        console.log("players", data);
+        setPlayers(data);
       });
 
       socket?.on("playCardResponse", (data) => {
@@ -87,7 +93,12 @@ function App() {
         )}
       </div>
       <div>
-        <GameBoard socket={socket} />
+        <GameBoard
+          socket={socket}
+          players={players}
+          winningCard={winningCard}
+          setWinningCard={setWinningCard}
+        />
       </div>
     </div>
   );
