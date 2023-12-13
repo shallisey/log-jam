@@ -11,6 +11,7 @@ function App() {
   const [winner, setWinner] = useState({});
   const [winningCard, setWinningCard] = useState({});
   const [players, setPlayers] = useState([]);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     if (socket === null) {
@@ -45,8 +46,8 @@ function App() {
     }
   }, [socket]);
 
-  const startGame = () => {
-    socket?.emit("startGame");
+  const joinGame = () => {
+    socket?.emit("newPlayer", name);
   };
 
   const endGame = () => {
@@ -76,7 +77,11 @@ function App() {
         {!gameHasStarted && (
           <div className="modal-container">
             <div className="modal">
-              <button onClick={() => startGame()}>Start Game!</button>
+              <>
+                <p>Enter you name Below to join a logjam game</p>
+                <input onChange={(e) => setName(e.target.value)} type="text" />
+              </>
+              <button onClick={() => joinGame()}>Join Game!</button>
             </div>
           </div>
         )}
@@ -86,7 +91,7 @@ function App() {
               {socket.id === winner?.winnningPlayer?.socketId ? (
                 <h3>You Won!</h3>
               ) : (
-                <h3>Player {winner?.winnningPlayer?.socketId} Won!</h3>
+                <h3>Player {winner?.winnningPlayer?.username} Won!</h3>
               )}
             </div>
           </div>
