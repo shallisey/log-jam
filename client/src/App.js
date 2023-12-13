@@ -12,6 +12,7 @@ function App() {
   const [winningCard, setWinningCard] = useState({});
   const [players, setPlayers] = useState([]);
   const [name, setName] = useState("");
+  const [sentName, setSetName] = useState(false);
 
   useEffect(() => {
     if (socket === null) {
@@ -48,6 +49,7 @@ function App() {
 
   const joinGame = () => {
     socket?.emit("newPlayer", name);
+    setSetName(true);
   };
 
   const endGame = () => {
@@ -66,15 +68,7 @@ function App() {
   return (
     <div>
       <div>
-        {winner && (
-          <>
-            <h1>{winner.username}</h1>
-            <h1>{winner.socketId}</h1>
-          </>
-        )}
-      </div>
-      <div>
-        {!gameHasStarted && (
+        {!gameHasStarted && !sentName && (
           <div className="modal-container">
             <div className="modal">
               <>
@@ -82,6 +76,15 @@ function App() {
                 <input onChange={(e) => setName(e.target.value)} type="text" />
               </>
               <button onClick={() => joinGame()}>Join Game!</button>
+            </div>
+          </div>
+        )}
+        {!gameHasStarted && sentName && (
+          <div className="modal-container">
+            <div className="modal">
+              <>
+                <p>Waiting...</p>
+              </>
             </div>
           </div>
         )}

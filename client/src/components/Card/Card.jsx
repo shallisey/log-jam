@@ -82,7 +82,7 @@ const Card = ({
               : "card__face card__face--back"
           }
         >
-          <h3>{card.type}</h3>
+          <h3>{isJudge ? "Story" : card.type}</h3>
           <p>{card.content}</p>
         </div>
       </div>
