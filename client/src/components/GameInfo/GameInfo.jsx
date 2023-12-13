@@ -13,7 +13,10 @@ const GameInfo = ({ playerInfo }) => {
       <h1>Hello World I'm LogJam!</h1>
       {playerInfo?.map((player) => (
         <>
-          <h3>Player {player.socketId}</h3>
+          <h3>
+            Player <br />
+            {player.socketId}
+          </h3>
           <div>Points: {player.points}</div>
         </>
       ))}

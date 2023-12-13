@@ -8,7 +8,7 @@ import "./GameBoard.scss";
 const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
   const [judgeCard, setJudgeCard] = useState({
     title: "Judge Card",
-    content: "content Judge",
+    content: null,
   });
   const [userCards, setUserCards] = useState([]);
   const [playedCards, setPlayedCards] = useState([]);
@@ -54,7 +54,7 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
         <MockDeck />
       </div>
       <div className="judge-card">
-        <Card card={judgeCard} isJudge={true} />
+        {judgeCard?.content && <Card card={judgeCard} isJudge={true} />}
       </div>
       <div className="played-cards">
         <Deck
