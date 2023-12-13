@@ -72,7 +72,7 @@ function App() {
           <div className="modal-container">
             <div className="modal">
               <>
-                <p>Enter you name Below to join a logjam game</p>
+                <p>Enter your name below to join a LogJam game</p>
                 <input onChange={(e) => setName(e.target.value)} type="text" />
               </>
               <button onClick={() => joinGame()}>Join Game!</button>
