@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const GameInfo = ({ playerInfo }) => {
+const GameInfo = ({ playerInfo, socket }) => {
   //   const [playerInfo, setPlayerInfo] = useState([
   //     { name: "lucy", wins: 0 },
   //     { name: null, wins: 0 },
@@ -14,7 +14,7 @@ const GameInfo = ({ playerInfo }) => {
       {playerInfo?.map((player) => (
         <>
           <h3>
-            Player <br />
+            {socket.id === player.socketId && "You Are"}Player <br />
             {player.socketId}
           </h3>
           <div>Points: {player.points}</div>
