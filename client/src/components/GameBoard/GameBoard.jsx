@@ -45,6 +45,13 @@ const GameBoard = ({ socket, players, winningCard, setWinningCard }) => {
     }
   }, [socket]);
 
+  const getIsShort = (playerPosition) => {
+    return (
+      (userCards.length === 5 && playedCards.length > playerPosition % 3) ||
+      (userCards.length === 4 && playedCards.length > (playerPosition % 3) + 1)
+    );
+  };
+
   return (
     <div className="game-grid">
       <div className="mockdeck-top">

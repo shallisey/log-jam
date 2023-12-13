@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./MockDeck.css";
 
-const MockDeck = ({ text }) => {
+const MockDeck = ({ isShort }) => {
   return (
     <div className="mockDeckContainer">
       {Array.from({ length: 5 }, () => (
